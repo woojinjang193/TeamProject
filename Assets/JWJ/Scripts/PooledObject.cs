@@ -37,4 +37,9 @@ public class PooledObject : MonoBehaviour
             returnPool.ReturnPool(this);
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        ReturnPool();
+    }
 }
