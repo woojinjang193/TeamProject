@@ -7,6 +7,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody rigid;
     [SerializeField] float playerSpeed;
     [SerializeField] private Shooter shooter;
+    [SerializeField] float playerHP;
+    [SerializeField] float playerAttack;
+    [SerializeField] float knockbackPower;
 
     private Vector3 inputVec;
 
@@ -41,7 +44,7 @@ public class PlayerController : MonoBehaviour
         rigid.velocity = inputVec * playerSpeed;
     }    
 
-    private void LookAtMouse()
+    private void LookAtMouse()  //일시정지시 마우스 안따라다니게
     {
         Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         Plane plane = new Plane(Vector3.up, Vector3.zero);
@@ -55,11 +58,48 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    private void PlayerAttack()
+    private void PlayerAttack() //퍼즈일땐 공격안되게
     {
         if (Input.GetMouseButtonDown(0)) // 0 = 좌클릭
         {
             shooter.Fire();
         }
     }
+
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Monster"))
+        {
+            MonsterController monster = collision.gameObject.GetComponent<MonsterController>();
+            if (monster != null)
+            {
+                PlayerTakeDamage(monster.monsterAttack, monster.transform);
+                Debug.Log("플레이어 체력" + playerHP);
+            }
+        }
     }
+
+    private void PlayerTakeDamage(float damage, Transform monsterTransform)
+    {
+        if (playerHP > 0)
+        {
+            playerHP -= damage;
+            DamageAction(monsterTransform);
+        }
+
+        else if (playerHP <=0)
+        {
+            Debug.Log("으앙 쥬금ㅠ");
+            gameObject.SetActive(false);
+        }
+    }
+ 
+   private void DamageAction(Transform monsterTransform)
+   {
+        Vector3 knockback = monsterTransform.forward;
+ 
+       rigid.AddForce(knockback * knockbackPower, ForceMode.Impulse);
+   }
+}
