@@ -232,6 +232,9 @@ MonoBehaviour:
   rigid: {fileID: 8105092352479756863}
   playerSpeed: 4
   shooter: {fileID: 3315107968760921362}
+  playerHP: 100
+  playerAttack: 3
+  knockbackPower: 30
 --- !u!54 &8105092352479756863
 Rigidbody:
   m_ObjectHideFlags: 0
