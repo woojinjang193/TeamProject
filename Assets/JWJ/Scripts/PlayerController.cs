@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float playerSpeed;
     [SerializeField] private Shooter shooter;
     [SerializeField] float playerHP;
-    [SerializeField] float playerAttack;
+    [SerializeField] public float playerAttack;
     [SerializeField] float knockbackPower;
 
     private Vector3 inputVec;
