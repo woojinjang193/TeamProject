@@ -233,7 +233,7 @@ MonoBehaviour:
   playerSpeed: 4
   shooter: {fileID: 3315107968760921362}
   playerHP: 100
-  playerAttack: 3
+  playerAttack: 0
   knockbackPower: 30
   pauseScript: {fileID: 0}
 --- !u!54 &8105092352479756863
