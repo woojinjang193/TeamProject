@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
             {
                 Debug.Log("∞‘¿”∏ÿ√„");
                 stopUi();
-              //  Time.timeScale = 0;
+                Time.timeScale = 0;
                 IsPaues = true;
                 Monster.SetActive(false);
                 Player.SetActive(false);
@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("∞‘¿”¿ÁΩ√¿€");
         StopUi.SetActive(false);
-      // Time.timeScale = 1;
+       Time.timeScale = 1;
         Monster.SetActive(true);
         Player.SetActive(true);
         IsPaues = false;
