@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Android;
 using UnityEngine.Events;
@@ -13,6 +14,9 @@ public class GameManager : MonoBehaviour
     [Header("object")]
     [SerializeField] GameObject Player;
     [SerializeField] GameObject Monster;
+    [SerializeField] GameObject timer;
+
+   
 
   [Header("UI")]
   [SerializeField] GameObject StopUi;
@@ -44,7 +48,8 @@ public class GameManager : MonoBehaviour
             {
                 Debug.Log("∞‘¿”∏ÿ√„");
                 stopUi();
-              //  Time.timeScale = 0;
+                timer.SetActive(false);
+              // Time.timeScale = 0;
                 IsPaues = true;
                 Monster.SetActive(false);
                 Player.SetActive(false);
@@ -60,7 +65,8 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("∞‘¿”¿ÁΩ√¿€");
         StopUi.SetActive(false);
-      // Time.timeScale = 1;
+        // Time.timeScale = 1;
+        timer.SetActive(true);
         Monster.SetActive(true);
         Player.SetActive(true);
         IsPaues = false;
@@ -68,6 +74,7 @@ public class GameManager : MonoBehaviour
     private void stopUi()
     {
         StopUi.SetActive(true);
+
     }
 
    
