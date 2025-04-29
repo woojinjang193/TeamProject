@@ -13,7 +13,9 @@ GameObject:
   - component: {fileID: 1791893881845415935}
   - component: {fileID: 8911886289688485804}
   - component: {fileID: 1700052088229867991}
-  - component: {fileID: 7074320869401778575}
+  - component: {fileID: 6503198048210514934}
+  - component: {fileID: 4190817952510378039}
+  - component: {fileID: 841350088339707826}
   m_Layer: 6
   m_Name: Monster
   m_TagString: Monster
@@ -132,12 +134,47 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &7074320869401778575
+--- !u!195 &6503198048210514934
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 466255752315967705}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &4190817952510378039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 466255752315967705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fe8993deab462f4ab2ea2e0faaf6988, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MoveSpeed: 1
+--- !u!114 &841350088339707826
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -149,8 +186,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 531811e0d17f4dc4f830d9a46b4aa98a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  testMoveSpeed: 1
+  monsterAttack: 1
+  monsterHP: 10
 --- !u!1 &5048399995589890195
 GameObject:
   m_ObjectHideFlags: 0
