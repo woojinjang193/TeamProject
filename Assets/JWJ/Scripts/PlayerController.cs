@@ -109,7 +109,7 @@ private void PlayerTakeDamage(float damage, Transform monsterTransform)
 {
 if (playerHP > 0)
 {
-    playerHP -= damage;
+    playerHP -= damage;   // 현재 체력정보 유아이로 넘겨야함
     DamageAction(monsterTransform);
 }
 

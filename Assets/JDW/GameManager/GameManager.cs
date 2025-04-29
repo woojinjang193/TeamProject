@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
 
    [SerializeField] private bool IsPaues;
 
-    public void Awake() // °ÔÀÓ¸Å´ÏÀú ÀÚµ¿»ı¼º
+    public void Awake() // ê²Œì„ë§¤ë‹ˆì € ìë™ìƒì„±
     {
         if(Instance == null)
         {
@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject); // ±× ¿Ü ÀÚµ¿ Á¦°Å
+            Destroy(gameObject); // ê·¸ ì™¸ ìë™ ì œê±°
         }
     }
     public void Start()
@@ -50,11 +50,11 @@ public class GameManager : MonoBehaviour
     {
         PlayerController player = new PlayerController();
 
-        if (Input.GetKeyDown(KeyCode.Q)) // ¸ó½ºÅÍ¿Í ÇÃ·¹ÀÌ¾î ¿ÀºêÁ§Æ® ºñÈ°¼ºÈ­ ¿Í ÇÔ²² uiÃâ·Â
+        if (Input.GetKeyDown(KeyCode.Q)) // ëª¬ìŠ¤í„°ì™€ í”Œë ˆì´ì–´ ì˜¤ë¸Œì íŠ¸ ë¹„í™œì„±í™” ì™€ í•¨ê»˜ uiì¶œë ¥
         {
             if (IsPaues == false)
             {
-                Debug.Log("°ÔÀÓ¸ØÃã");
+                Debug.Log("ê²Œì„ë©ˆì¶¤");
                 stopUi();
                 Time.timeScale = 0;
                 IsPaues = true;
@@ -73,14 +73,16 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-    public void GameContinue() //°ÔÀÓ ÀÏ½ÃÁ¤Áö ÇØÁ¦
+    public void GameContinue() //ê²Œì„ ì¼ì‹œì •ì§€ í•´ì œ
     {
-        Debug.Log("°ÔÀÓÀç½ÃÀÛ");
+        Debug.Log("ê²Œì„ì¬ì‹œì‘");
         StopUi.SetActive(false);
+
         Time.timeScale = 1;
       //  timer.SetActive(true);
       //  Monster.SetActive(true);
       //  Player.SetActive(true);
+
         IsPaues = false;
     }
     private void stopUi()
@@ -93,8 +95,8 @@ public class GameManager : MonoBehaviour
    
     public void GameOver()
     {
-        //TODO : Ä³¸¯ÅÍ »ç¸Á½Ã °ÔÀÓ¿À¹ö
-        Debug.Log("°ÔÀÓ¿À¹ö");
+        //TODO : ìºë¦­í„° ì‚¬ë§ì‹œ ê²Œì„ì˜¤ë²„
+        Debug.Log("ê²Œì„ì˜¤ë²„");
         gameOver.SetActive(true);
     }
 }
