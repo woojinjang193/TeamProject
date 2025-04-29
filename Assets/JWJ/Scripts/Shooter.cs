@@ -9,6 +9,7 @@ public class Shooter : MonoBehaviour
     [SerializeField] Transform muzzlePoint;
     [SerializeField] ObjectPool bulletPool;
     [SerializeField] float fireDelay;
+    
 
     [Range(10, 30)]
     [SerializeField] float bulletSpeed;

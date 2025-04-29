@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
    // [SerializeField] public float playerAttack;
     [SerializeField] float knockbackPower;
     //[SerializeField] private Stop pauseScript;
+    //[SerializeField] private Animator animator;
 
     private Vector3 inputVec;
     private bool isKnockback = false;
@@ -68,7 +69,8 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-              shooter.Fire();
+            shooter.Fire();
+            //animator.SetTrigger("Attack");
 
         }
         
