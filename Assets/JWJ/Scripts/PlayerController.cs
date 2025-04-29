@@ -10,8 +10,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float playerHP;
    // [SerializeField] public float playerAttack;
     [SerializeField] float knockbackPower;
+
     //[SerializeField] private Stop pauseScript;
     //[SerializeField] private Animator animator;
+
 
     private Vector3 inputVec;
     private bool isKnockback = false;
@@ -58,8 +60,10 @@ public class PlayerController : MonoBehaviour
         if (plane.Raycast(cameraRay, out rayLength))
         {
 
+
               Vector3 lookDir = cameraRay.GetPoint(rayLength);
               transform.LookAt(new Vector3(lookDir.x, transform.position.y, lookDir.z));
+
         }
     }
 
@@ -67,10 +71,12 @@ public class PlayerController : MonoBehaviour
     private void PlayerAttack() 
     {
 
+
         if (Input.GetMouseButtonDown(0))
         {
             shooter.Fire();
             //animator.SetTrigger("Attack");
+
 
         }
         
@@ -86,11 +92,11 @@ if (collision.gameObject.CompareTag("Monster"))
     if (monster != null)
     {
         PlayerTakeDamage(monster.monsterAttack, monster.transform);
-        Debug.Log("«√∑π¿ÃæÓ √º∑¬" + playerHP);
+        Debug.Log("ÌîåÎ†àÏù¥Ïñ¥ Ï≤¥Î†•" + playerHP);
 
         if (playerHP <= 0)
         {
-            Debug.Log("¿∏æ” ¡Í±›§–");
+            Debug.Log("ÏúºÏïô Ï•¨Í∏à„Ö†");
             gameObject.SetActive(false);
         }
     }
