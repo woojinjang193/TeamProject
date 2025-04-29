@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Stop : MonoBehaviour
 {
-    private bool IsPaues;
+    public bool IsPaues;
     void Start()
     {
         IsPaues = false;
