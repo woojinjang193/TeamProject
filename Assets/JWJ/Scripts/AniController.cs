@@ -21,9 +21,8 @@ public class AniController : MonoBehaviour
             anima.SetTrigger("Attack");
         }
 
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
-        {
-            anima.SetTrigger("Run");
-        }
+        bool isMoving = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D);
+        anima.SetBool("isMoving", isMoving);
+        
     }
 }
