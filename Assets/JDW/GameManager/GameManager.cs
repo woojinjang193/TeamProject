@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private bool IsPaues;
 
-    public void Awake()
+    public void Awake() // 게임매니저 자동생성
     {
         if(Instance == null)
         {
@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            Destroy(gameObject); // 그 외 자동 제거
         }
     }
     public void Start()
@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     }
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q)) // 게임 일시정지와 함께 몬스터와 플레이어 오브젝트 비활성화 
         {
             if (IsPaues == false)
             {
@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-    public void GameContinue()
+    public void GameContinue() //게임 일시정지 해제
     {
         Debug.Log("게임재시작");
         StopUi.SetActive(false);
