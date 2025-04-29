@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Stop pauseScript;
 
     private Vector3 inputVec;
-
+    private bool isKnockback = false;
 
     void Start()
     {
@@ -22,7 +22,10 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
+        if (!isKnockback)
+        {
+            Move();
+        }
     }
     void Update()
     {
@@ -94,7 +97,15 @@ public class PlayerController : MonoBehaviour
             {
                 PlayerTakeDamage(monster.monsterAttack, monster.transform);
                 Debug.Log("ÇÃ·¹ÀÌ¾î Ã¼·Â" + playerHP);
+
+                if (playerHP <= 0)
+                {
+                    Debug.Log("À¸¾Ó Áê±Ý¤Ð");
+                    gameObject.SetActive(false);
+                }
             }
+
+
         }
     }
 
@@ -106,17 +117,20 @@ public class PlayerController : MonoBehaviour
             DamageAction(monsterTransform);
         }
 
-        else if (playerHP <=0)
-        {
-            Debug.Log("À¸¾Ó Áê±Ý¤Ð");
-            gameObject.SetActive(false);
-        }
+        
     }
  
    private void DamageAction(Transform monsterTransform)
    {
         Vector3 knockback = monsterTransform.forward;
- 
-       rigid.AddForce(knockback * knockbackPower, ForceMode.Impulse);
-   }
+
+        rigid.velocity = knockback * knockbackPower;
+        isKnockback = true;
+        Invoke(nameof(EndKnockback), 0.5f);
+    }
+
+    private void EndKnockback()
+    {
+        isKnockback = false;
+    }
 }

@@ -9879,7 +9879,11 @@ PrefabInstance:
       objectReference: {fileID: 979242837}
     - target: {fileID: 3042518232440076159, guid: bd704c453381e314ea332e13772b2f06, type: 3}
       propertyPath: knockbackPower
-      value: 30
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105092352479756863, guid: bd704c453381e314ea332e13772b2f06, type: 3}
+      propertyPath: m_Drag
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8105092352479756863, guid: bd704c453381e314ea332e13772b2f06, type: 3}
       propertyPath: m_UseGravity
