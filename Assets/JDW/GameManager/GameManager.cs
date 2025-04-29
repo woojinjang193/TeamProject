@@ -17,14 +17,15 @@ public class GameManager : MonoBehaviour
   [Header("UI")]
   [SerializeField] GameObject StopUi;
 
-    [SerializeField] private bool IsPaues;
+   [SerializeField] private bool IsPaues;
 
     public void Awake() // 게임매니저 자동생성
     {
         if(Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            Resources.Load<GameObject>("GameManager");
+            //DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -37,13 +38,13 @@ public class GameManager : MonoBehaviour
     }
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q)) // 게임 일시정지와 함께 몬스터와 플레이어 오브젝트 비활성화 
+        if (Input.GetKeyDown(KeyCode.Q)) // 몬스터와 플레이어 오브젝트 비활성화 와 함께 ui출력
         {
             if (IsPaues == false)
             {
                 Debug.Log("게임멈춤");
-                StopUi.SetActive(true);
-                Time.timeScale = 0;
+                stopUi();
+              //  Time.timeScale = 0;
                 IsPaues = true;
                 Monster.SetActive(false);
                 Player.SetActive(false);
@@ -59,11 +60,16 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("게임재시작");
         StopUi.SetActive(false);
-        Time.timeScale = 1;
+      // Time.timeScale = 1;
         Monster.SetActive(true);
         Player.SetActive(true);
         IsPaues = false;
     }
+    private void stopUi()
+    {
+        StopUi.SetActive(true);
+    }
+
    
    
     public void GameOver()

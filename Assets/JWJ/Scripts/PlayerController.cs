@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float playerHP;
     [SerializeField] public float playerAttack;
     [SerializeField] float knockbackPower;
-    [SerializeField] private Stop pauseScript;
+    
 
     private Vector3 inputVec;
 
@@ -53,16 +53,10 @@ public class PlayerController : MonoBehaviour
         
         if (plane.Raycast(cameraRay, out rayLength))
         {
-            if (pauseScript.IsPaues == true)
-            {
-                return;
-            }
-
-            else
-            {
+            
               Vector3 lookDir = cameraRay.GetPoint(rayLength);
               transform.LookAt(new Vector3(lookDir.x, transform.position.y, lookDir.z));
-            }
+            
         }
     }
 
@@ -71,15 +65,9 @@ public class PlayerController : MonoBehaviour
     {
       if (Input.GetMouseButtonDown(0))
       {
-          if (pauseScript.IsPaues == true)
-          {
-              return;
-          }
-      
-          else
-          {
+          
             shooter.Fire();
-          }
+         
       }
     }
 
