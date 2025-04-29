@@ -9,13 +9,14 @@ public class Shooter : MonoBehaviour
     [SerializeField] Transform muzzlePoint;
     [SerializeField] ObjectPool bulletPool;
     [SerializeField] float fireDelay;
+    
 
     [Range(10, 30)]
     [SerializeField] float bulletSpeed;
 
     private float lastFireTime = 0;
 
-    public void Fire()
+    public void Fire() //설명적기 
     {
         if (Time.time - lastFireTime < fireDelay)
         {
@@ -28,7 +29,7 @@ public class Shooter : MonoBehaviour
         bulletRigibody.velocity = muzzlePoint.forward * bulletSpeed;
     }
 
-    public void Fire(float speed)
+    public void Fire(float speed) //설명적기
     {
         if (Time.time - lastFireTime < fireDelay)
         {

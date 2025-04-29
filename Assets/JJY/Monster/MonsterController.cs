@@ -1,50 +1,76 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MonsterController : MonoBehaviour
 {
-    [SerializeField] private GameObject target;
-    [SerializeField] public float testMoveSpeed = 1f; //실험용이므로 나중에 수정 필요
     [SerializeField] public float monsterAttack;
     [SerializeField] public float monsterHP;
 
+    [SerializeField] public float knockbackForce = 10f;
+    [SerializeField] public float knockbackDelay = 0.01f;
 
-    private void Start()
+    private Rigidbody rb;
+    private NavMeshAgent agent;
+
+    private void Awake()
     {
-        if (target == null)
+        rb = GetComponent<Rigidbody>();
+        agent = GetComponent<NavMeshAgent>();
+    }
+
+    
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Bullet"))
         {
-            target = GameObject.FindWithTag("Player");
-        }
-    }
-
-    private void Update()
-    {
-        Move();
-    }
-
-    private void Move()
-    {
-        transform.position = Vector3.MoveTowards(transform.position, target.transform.position, testMoveSpeed * Time.deltaTime);
-        transform.LookAt(target.transform);
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Bullet"))
-        {
-            PlayerController player = collision.gameObject.GetComponent<PlayerController>();
-            if (player != null)
+            Bullet bullet = other.gameObject.GetComponent<Bullet>();
+            if (bullet != null)
             {
-                TakeDamage(player.playerAttack); //여기 병합 후 확인해야함
-                Debug.Log("플레이어 체력" + monsterHP);
+                TakeDamage(bullet.bulletDamage);
+                Knockback(other.transform);
+                Destroy(other.gameObject);
+
+                Debug.Log("몬스터 체력 : " + monsterHP);
+                if (monsterHP <= 0)
+                {
+                    Destroy(gameObject);
+                }
             }
+        }
+        else
+        {
+            agent.isStopped = true;
+            StartCoroutine(MoveAfterKnockback());
         }
     }
 
     private void TakeDamage(float damage)
     {
         monsterHP -= damage;
+    }
+
+    private void Knockback(Transform bulletTransform)
+    {
+        if (rb != null && agent != null)
+        {
+            Vector3 direction = transform.position - bulletTransform.position;
+
+            agent.isStopped = true;
+            rb.velocity = direction * knockbackForce;
+            StartCoroutine(MoveAfterKnockback());
+        }
+    }
+
+    private IEnumerator MoveAfterKnockback()
+    {
+        yield return new WaitForSeconds(knockbackDelay);
+
+        if (agent != null)
+        {
+            rb.velocity = Vector3.zero;
+            agent.isStopped = false;
+        }
     }
 }
