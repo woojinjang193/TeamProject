@@ -8,12 +8,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float playerSpeed;
     [SerializeField] private Shooter shooter;
     [SerializeField] float playerHP;
-    [SerializeField] public float playerAttack;
+   // [SerializeField] public float playerAttack;
     [SerializeField] float knockbackPower;
-    [SerializeField] private Stop pauseScript;
+    //[SerializeField] private Stop pauseScript;
+    //[SerializeField] private Animator animator;
 
     private Vector3 inputVec;
-
+    private bool isKnockback = false;
 
     void Start()
     {
@@ -22,7 +23,10 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
+        if (!isKnockback)
+        {
+            Move();
+        }
     }
     void Update()
     {
@@ -45,7 +49,7 @@ public class PlayerController : MonoBehaviour
         rigid.velocity = inputVec * playerSpeed;
     }    
 
-    private void LookAtMouse()  //일시정지시 마우스 안따라다니게
+    private void LookAtMouse()  
     {
         Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         Plane plane = new Plane(Vector3.up, Vector3.zero);
@@ -53,70 +57,70 @@ public class PlayerController : MonoBehaviour
         
         if (plane.Raycast(cameraRay, out rayLength))
         {
-            if (pauseScript.IsPaues == true)
-            {
-                return;
-            }
 
-            else
-            {
               Vector3 lookDir = cameraRay.GetPoint(rayLength);
               transform.LookAt(new Vector3(lookDir.x, transform.position.y, lookDir.z));
-            }
         }
     }
 
 
-    private void PlayerAttack() //퍼즈일땐 공격안되게
+    private void PlayerAttack() 
     {
+
         if (Input.GetMouseButtonDown(0))
         {
-            if (pauseScript.IsPaues == true)
-            {
-                return;
-            }
+            shooter.Fire();
+            //animator.SetTrigger("Attack");
 
-            else
-            {
-              shooter.Fire();
-            }
         }
+        
     }
+        
 
 
-
-    private void OnCollisionEnter(Collision collision)
+private void OnCollisionEnter(Collision collision)
+{
+if (collision.gameObject.CompareTag("Monster"))
+{
+    MonsterController monster = collision.gameObject.GetComponent<MonsterController>();
+    if (monster != null)
     {
-        if (collision.gameObject.CompareTag("Monster"))
-        {
-            MonsterController monster = collision.gameObject.GetComponent<MonsterController>();
-            if (monster != null)
-            {
-                PlayerTakeDamage(monster.monsterAttack, monster.transform);
-                Debug.Log("플레이어 체력" + playerHP);
-            }
-        }
-    }
+        PlayerTakeDamage(monster.monsterAttack, monster.transform);
+        Debug.Log("플레이어 체력" + playerHP);
 
-    private void PlayerTakeDamage(float damage, Transform monsterTransform)
-    {
-        if (playerHP > 0)
-        {
-            playerHP -= damage;
-            DamageAction(monsterTransform);
-        }
-
-        else if (playerHP <=0)
+        if (playerHP <= 0)
         {
             Debug.Log("으앙 쥬금ㅠ");
             gameObject.SetActive(false);
         }
     }
- 
-   private void DamageAction(Transform monsterTransform)
-   {
-        Vector3 knockback = monsterTransform.forward;
- 
-       rigid.AddForce(knockback * knockbackPower, ForceMode.Impulse);
-   }
+
+
+}
+}
+
+private void PlayerTakeDamage(float damage, Transform monsterTransform)
+{
+if (playerHP > 0)
+{
+    playerHP -= damage;
+    DamageAction(monsterTransform);
+}
+
+
+}
+
+private void DamageAction(Transform monsterTransform)
+{
+Vector3 knockback = monsterTransform.forward;
+
+rigid.velocity = knockback * knockbackPower;
+isKnockback = true;
+Invoke(nameof(EndKnockback), 0.5f);
+}
+
+private void EndKnockback()
+{
+isKnockback = false;
+}
 }
