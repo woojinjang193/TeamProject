@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Android;
 using UnityEngine.Events;
+using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.UI;
 
 
@@ -12,14 +13,19 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     [Header("object")]
-    [SerializeField] GameObject Player;
-    [SerializeField] GameObject Monster;
-    [SerializeField] GameObject timer;
+    [SerializeField] PlayerController Player;
+    //[SerializeField] GameObject Monster;
+    //[SerializeField] GameObject timer;
 
-   
+    //[SerializeField] PlayerController player;
 
-  [Header("UI")]
-  [SerializeField] GameObject StopUi;
+    
+    
+
+   [Header("UI")]
+   [SerializeField] GameObject StopUi;
+   [SerializeField] GameObject gameOver;
+
 
    [SerializeField] private bool IsPaues;
 
@@ -42,22 +48,28 @@ public class GameManager : MonoBehaviour
     }
     public void Update()
     {
+        PlayerController player = new PlayerController();
+
         if (Input.GetKeyDown(KeyCode.Q)) // 몬스터와 플레이어 오브젝트 비활성화 와 함께 ui출력
         {
             if (IsPaues == false)
             {
                 Debug.Log("게임멈춤");
                 stopUi();
-                timer.SetActive(false);
-              // Time.timeScale = 0;
+                Time.timeScale = 0;
                 IsPaues = true;
-                Monster.SetActive(false);
-                Player.SetActive(false);
+              //  timer.SetActive(false);
+              //  Monster.SetActive(false);
+              //  Player.SetActive(false);
                 return;
             }
             if (IsPaues == true)
             {
                 GameContinue();
+            }
+            if (player == false)
+            {
+                GameOver();
             }
         }
     }
@@ -65,10 +77,10 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("게임재시작");
         StopUi.SetActive(false);
-        // Time.timeScale = 1;
-        timer.SetActive(true);
-        Monster.SetActive(true);
-        Player.SetActive(true);
+        Time.timeScale = 1;
+      //  timer.SetActive(true);
+      //  Monster.SetActive(true);
+      //  Player.SetActive(true);
         IsPaues = false;
     }
     private void stopUi()
@@ -82,5 +94,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         //TODO : 캐릭터 사망시 게임오버
+        Debug.Log("게임오버");
+        gameOver.SetActive(true);
     }
 }
