@@ -69,18 +69,18 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerAttack() //퍼즈일땐 공격안되게
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (pauseScript.IsPaues == true)
-            {
-                return;
-            }
-
-            else
-            {
-              shooter.Fire();
-            }
-        }
+      if (Input.GetMouseButtonDown(0))
+      {
+          if (pauseScript.IsPaues == true)
+          {
+              return;
+          }
+      
+          else
+          {
+            shooter.Fire();
+          }
+      }
     }
 
 

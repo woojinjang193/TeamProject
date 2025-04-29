@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Android;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    [Header("UI")]
-    [SerializeField] GameObject StopUi;
+    [Header("object")]
+    [SerializeField] GameObject Player;
+    [SerializeField] GameObject Monster;
 
-    private bool IsPaues;
+  [Header("UI")]
+  [SerializeField] GameObject StopUi;
+
+    [SerializeField] private bool IsPaues;
 
     public void Awake()
     {
@@ -36,20 +41,30 @@ public class GameManager : MonoBehaviour
         {
             if (IsPaues == false)
             {
-               // StopUi.SetActive(true);
+                Debug.Log("∞‘¿”∏ÿ√„");
+                StopUi.SetActive(true);
                 Time.timeScale = 0;
                 IsPaues = true;
+                Monster.SetActive(false);
+                Player.SetActive(false);
                 return;
             }
             if (IsPaues == true)
             {
-              //  StopUi.SetActive(false);
-                Time.timeScale = 1;
-                IsPaues = false;
-                return;
+                GameContinue();
             }
         }
     }
+    public void GameContinue()
+    {
+        Debug.Log("∞‘¿”¿ÁΩ√¿€");
+        StopUi.SetActive(false);
+        Time.timeScale = 1;
+        Monster.SetActive(true);
+        Player.SetActive(true);
+        IsPaues = false;
+    }
+   
    
     public void GameOver()
     {
