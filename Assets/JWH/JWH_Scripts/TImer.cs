@@ -30,10 +30,10 @@ public class Timer : MonoBehaviour
         {
             time = 0; 
             UpdateTimeUI();
-            // 게임 오버 처리(타이머가 멈추는 경우)
+            // 게임 오버 처리 텍스트만 (타이머가 멈추는 경우)
             if (GameOverText != null)
             {
-                GameOverText.gameObject.SetActive(true);
+                GameOverText.gameObject.SetActive(true);// 게임오버 텍스트
             }
             enabled = false; // 타이머 멈춤 
         }
@@ -67,5 +67,5 @@ public class Timer : MonoBehaviour
  * UI에서 레거시 - 텍스트로 3개 생성
  * 각각 분,초,게임오버
  * Timer에 집어넣고 폰트, 사이즈, 위치 등등등 변경
- * 게임오버가 필요 없을 시 폰트를 지우면 해결가능
+ * 게임오버텍스트 필요 없을 시 폰트를 지우면 해결가능
 */
