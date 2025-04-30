@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6403ae67638b20e4e902cb31e5585b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 1217477278003499384, guid: bd704c453381e314ea332e13772b2f06, type: 3}
-  Monster: {fileID: 466255752315967705, guid: 4aef5787fd16088499cb29198e80fc05, type: 3}
+  Player: {fileID: 3042518232440076159, guid: bd704c453381e314ea332e13772b2f06, type: 3}
   StopUi: {fileID: 6322534088635409647, guid: 1538f3daf4abb034ab38cde325abe909, type: 3}
+  gameOver: {fileID: 0}
   IsPaues: 0
