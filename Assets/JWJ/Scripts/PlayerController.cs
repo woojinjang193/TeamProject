@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     //[SerializeField] private Animator animator;
     private float _maxHP;  // 맥스체력 저장공간
     public bool isKnockback = false;
+
     public float maxHP  
     {
         get { return _maxHP; }
@@ -26,9 +27,16 @@ public class PlayerController : MonoBehaviour
     {
         get { return playerHP; }
     }
+
+    private void Awake()
+    {
+        _maxHP = playerHP; // _maxHP = playerHP; //초기체력(맥스체력) 저장
+                           //  Debug.Log("player 체력 초기화");
+    }
     void Start() 
     {
-        _maxHP = playerHP; //초기체력(맥스체력) 저장
+      // _maxHP = playerHP; //초기체력(맥스체력) 저장
+      // Debug.Log("player 체력 초기화");
  
     }
 
@@ -58,7 +66,7 @@ public class PlayerController : MonoBehaviour
 
             Vector3 lookForward = new Vector3(cameraArm.forward.x, 0f, cameraArm.forward.z).normalized;
             Vector3 lookRight = new Vector3(cameraArm.right.x, 0f, cameraArm.right.z).normalized;
-            Vector3 moveDir = lookForward * moveInput.y + lookRight * moveInput.x;
+            Vector3 moveDir = (lookForward * moveInput.y + lookRight * moveInput.x).normalized;
 
             Player.forward = lookForward;
             transform.position += moveDir * Time.deltaTime * playerSpeed;

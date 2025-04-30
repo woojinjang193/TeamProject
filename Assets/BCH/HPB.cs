@@ -16,19 +16,19 @@ public class HPB : MonoBehaviour
         maxHp = player.maxHP; //JWJ 추가
         curHp = player.curHP; //JWJ 추가
         hpbar.value = (float) curHp / (float) maxHp;
-        Debug.Log("maxHP 저장"); // JWJ 추가
+       // Debug.Log("maxHP 초기화(HPB)"); // JWJ 추가
     }
 
     private void Update() //JWJ 추가
     {
         curHp = player.curHP;
-        Debug.Log("curHP 저장"); // JWJ 추가
+        //Debug.Log("curHP 저장"); // JWJ 추가
         HandleHp();
 
     }
     private void HandleHp()
     {
-        Debug.Log("HandleHP 호출됨"); // JWJ 추가
+       // Debug.Log("HandleHP 호출됨"); // JWJ 추가
         hpbar.value = Mathf.Lerp(hpbar.value, (float)curHp / (float)maxHp, Time.deltaTime * 10);
     }
 
