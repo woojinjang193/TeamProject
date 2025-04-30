@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody rigid;
     [SerializeField] float playerSpeed;
     [SerializeField] private Shooter shooter;
-    [SerializeField] float playerHP;
+    [SerializeField] public float playerHP;
    // [SerializeField] public float playerAttack;
     [SerializeField] float knockbackPower;
     [SerializeField ]private float mouseSensitivity = 5f;
@@ -16,13 +16,19 @@ public class PlayerController : MonoBehaviour
 
     //[SerializeField] private Stop pauseScript;
     //[SerializeField] private Animator animator;
-
-
-    private Vector3 inputVec;
+    private float _maxHP;  // 맥스체력 저장공간
     public bool isKnockback = false;
-
-    void Start()
+    public float maxHP  
     {
+        get { return _maxHP; }
+    }
+    public float curHP   //curHP 에 현재체력 계속 저장
+    {
+        get { return playerHP; }
+    }
+    void Start() 
+    {
+        _maxHP = playerHP; //초기체력(맥스체력) 저장
  
     }
 
@@ -36,7 +42,12 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         LookAround();
-        PlayerAttack();
+
+        if (!isKnockback)
+        {
+            PlayerAttack();
+        }
+        
     }
 
 
@@ -50,7 +61,7 @@ public class PlayerController : MonoBehaviour
             Vector3 moveDir = lookForward * moveInput.y + lookRight * moveInput.x;
 
             Player.forward = lookForward;
-            transform.position += moveDir * Time.deltaTime * 3f;
+            transform.position += moveDir * Time.deltaTime * playerSpeed;
     }
 
     private void LookAround()
@@ -104,6 +115,7 @@ if (collision.gameObject.CompareTag("Monster"))
         {
             Debug.Log("으앙 쥬금ㅠ");
             gameObject.SetActive(false);
+            GameManager.Instance.OnPlayerDide.Invoke();
         }
     }
 
@@ -115,8 +127,7 @@ private void PlayerTakeDamage(float damage, Transform monsterTransform)
 {
 if (playerHP > 0)
 {
-    playerHP -= damage;   // 현재 체력정보 유아이로 넘겨야함
-            
+    playerHP -= damage;  
     DamageAction(monsterTransform);
 }
 
