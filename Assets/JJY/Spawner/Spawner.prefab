@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &685472599623353904
+--- !u!1 &8019782598955619086
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,43 +8,45 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5262257443905516867}
-  - component: {fileID: 3420965214219765669}
+  - component: {fileID: 1311098477132652100}
+  - component: {fileID: 7140752223113228446}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5262257443905516867
+--- !u!4 &1311098477132652100
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 685472599623353904}
+  m_GameObject: {fileID: 8019782598955619086}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.3682923, y: 3.4955702, z: -0.43803743}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3420965214219765669
+--- !u!114 &7140752223113228446
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 685472599623353904}
+  m_GameObject: {fileID: 8019782598955619086}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6403ae67638b20e4e902cb31e5585b2e, type: 3}
+  m_Script: {fileID: 11500000, guid: b8f342794ed48e245a85fba1be43f3fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 3042518232440076159, guid: bd704c453381e314ea332e13772b2f06, type: 3}
-  StopUi: {fileID: 6322534088635409647, guid: 1538f3daf4abb034ab38cde325abe909, type: 3}
-  gameOver: {fileID: 0}
-  IsPaues: 0
+  waves:
+  - monsterCount: 3
+    timeBetweenSpawn: 2
+  - monsterCount: 5
+    timeBetweenSpawn: 1
+  monster: {fileID: 841350088339707826, guid: 4aef5787fd16088499cb29198e80fc05, type: 3}

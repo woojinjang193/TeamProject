@@ -114,8 +114,10 @@ if (collision.gameObject.CompareTag("Monster"))
         if (playerHP <= 0)
         {
             Debug.Log("으앙 쥬금ㅠ");
+
             gameObject.SetActive(false);
             GameManager.Instance.OnPlayerDide.Invoke();
+
         }
     }
 
