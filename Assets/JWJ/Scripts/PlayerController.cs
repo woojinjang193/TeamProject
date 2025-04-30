@@ -7,23 +7,29 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody rigid;
     [SerializeField] float playerSpeed;
     [SerializeField] private Shooter shooter;
-    [SerializeField] float playerHP;
-   // [SerializeField] public float playerAttack;
+    [SerializeField] public float playerHP;
+    // [SerializeField] public float playerAttack;
     [SerializeField] float knockbackPower;
-    [SerializeField ]private float mouseSensitivity = 5f;
+    [SerializeField] private float mouseSensitivity = 5f;
     [SerializeField] private Transform Player;
     [SerializeField] private Transform cameraArm;
 
     //[SerializeField] private Stop pauseScript;
     //[SerializeField] private Animator animator;
-
-
-    private Vector3 inputVec;
+    private float _maxHP;  // 맥스체력 저장공간
     public bool isKnockback = false;
-
+    public float maxHP
+    {
+        get { return _maxHP; }
+    }
+    public float curHP   //curHP 에 현재체력 계속 저장
+    {
+        get { return playerHP; }
+    }
     void Start()
     {
- 
+        _maxHP = playerHP; //초기체력(맥스체력) 저장
+
     }
 
     private void FixedUpdate()
@@ -36,21 +42,26 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         LookAround();
-        PlayerAttack();
+
+        if (!isKnockback)
+        {
+            PlayerAttack();
+        }
+
     }
 
 
     private void Move()
     {
         Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-       
 
-            Vector3 lookForward = new Vector3(cameraArm.forward.x, 0f, cameraArm.forward.z).normalized;
-            Vector3 lookRight = new Vector3(cameraArm.right.x, 0f, cameraArm.right.z).normalized;
-            Vector3 moveDir = lookForward * moveInput.y + lookRight * moveInput.x;
 
-            Player.forward = lookForward;
-            transform.position += moveDir * Time.deltaTime * 3f;
+        Vector3 lookForward = new Vector3(cameraArm.forward.x, 0f, cameraArm.forward.z).normalized;
+        Vector3 lookRight = new Vector3(cameraArm.right.x, 0f, cameraArm.right.z).normalized;
+        Vector3 moveDir = lookForward * moveInput.y + lookRight * moveInput.x;
+
+        Player.forward = lookForward;
+        transform.position += moveDir * Time.deltaTime * playerSpeed;
     }
 
     private void LookAround()
@@ -74,7 +85,7 @@ public class PlayerController : MonoBehaviour
 
 
 
-    private void PlayerAttack() 
+    private void PlayerAttack()
     {
 
 
@@ -85,57 +96,56 @@ public class PlayerController : MonoBehaviour
 
 
         }
-        
+
     }
-        
 
 
-private void OnCollisionEnter(Collision collision)
-{
-if (collision.gameObject.CompareTag("Monster"))
-{
-    MonsterController monster = collision.gameObject.GetComponent<MonsterController>();
-    if (monster != null)
+
+    private void OnCollisionEnter(Collision collision)
     {
-        PlayerTakeDamage(monster.monsterAttack, monster.transform);
-        Debug.Log("플레이어 체력" + playerHP);
-
-        if (playerHP <= 0)
+        if (collision.gameObject.CompareTag("Monster"))
         {
-            Debug.Log("으앙 쥬금ㅠ");
-            gameObject.SetActive(false);
+            MonsterController monster = collision.gameObject.GetComponent<MonsterController>();
+            if (monster != null)
+            {
+                PlayerTakeDamage(monster.monsterAttack, monster.transform);
+                Debug.Log("플레이어 체력" + playerHP);
+
+                if (playerHP <= 0)
+                {
+                    Debug.Log("으앙 쥬금ㅠ");
+                    gameObject.SetActive(false);
+                }
+            }
+
+
         }
     }
 
-
-}
-}
-
-private void PlayerTakeDamage(float damage, Transform monsterTransform)
-{
-if (playerHP > 0)
-{
-    playerHP -= damage;   // 현재 체력정보 유아이로 넘겨야함
-            
-    DamageAction(monsterTransform);
-}
+    private void PlayerTakeDamage(float damage, Transform monsterTransform)
+    {
+        if (playerHP > 0)
+        {
+            playerHP -= damage;
+            DamageAction(monsterTransform);
+        }
 
 
-}
+    }
 
-private void DamageAction(Transform monsterTransform)
-{
+    private void DamageAction(Transform monsterTransform)
+    {
 
         Debug.Log("플레이어 넉백");
         Vector3 knockback = monsterTransform.forward;
 
-rigid.velocity = knockback * knockbackPower;
-isKnockback = true;
-Invoke(nameof(EndKnockback), 0.5f);
-}
+        rigid.velocity = knockback * knockbackPower;
+        isKnockback = true;
+        Invoke(nameof(EndKnockback), 0.5f);
+    }
 
-private void EndKnockback()
-{
-isKnockback = false;
-}
+    private void EndKnockback()
+    {
+        isKnockback = false;
+    }
 }
