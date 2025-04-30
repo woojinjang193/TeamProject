@@ -47,6 +47,38 @@ MonoBehaviour:
   pool: []
   prefab: {fileID: 839177837874993963, guid: c3591bdb3cdc2cc45bde9c8c8d9812ca, type: 3}
   size: 10
+--- !u!1 &4679128465443448674
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 7908f1a2bde075d478e43a6e8b8277be, type: 3}
+  m_PrefabInstance: {fileID: 3733052645370478187}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8553676360893732209}
+  - component: {fileID: 1936466087877008972}
+  m_Layer: 0
+  m_Name: 'Archer (Missing Prefab with guid: 7908f1a2bde075d478e43a6e8b8277be)'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8553676360893732209
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 7908f1a2bde075d478e43a6e8b8277be, type: 3}
+  m_PrefabInstance: {fileID: 3733052645370478187}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4679128465443448674}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1144301524668735807}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7857139991981487803
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,14 +145,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d94eb6a259019a4582cdaf248671cf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-
-  bulletpre: {fileID: 3866841804270395531, guid: c3591bdb3cdc2cc45bde9c8c8d9812ca, type: 3}
-  muzzlePoint: {fileID: 7498316697072064174}
-  bulletPool: {fileID: 5615972782239758798}
-  fireDelay: 0.3
+  bulletpre: {fileID: 0}
+  muzzlePoint: {fileID: 0}
+  bulletPool: {fileID: 0}
+  fireDelay: 0
   bulletSpeed: 10
 --- !u!54 &8169431429289533616
-
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -244,16 +274,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1936466087877008972}
   m_SourcePrefab: {fileID: 100100000, guid: 7908f1a2bde075d478e43a6e8b8277be, type: 3}
---- !u!95 &1747045452063094795 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: -6057140222963153312, guid: 7908f1a2bde075d478e43a6e8b8277be, type: 3}
-  m_PrefabInstance: {fileID: 3733052645370478187}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &4679128465443448674 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 7908f1a2bde075d478e43a6e8b8277be, type: 3}
-  m_PrefabInstance: {fileID: 3733052645370478187}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1936466087877008972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,9 +286,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f0c17a337c332441b08875aa4955976, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anima: {fileID: 1747045452063094795}
---- !u!4 &8553676360893732209 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 7908f1a2bde075d478e43a6e8b8277be, type: 3}
-  m_PrefabInstance: {fileID: 3733052645370478187}
-  m_PrefabAsset: {fileID: 0}
+  anima: {fileID: 0}
