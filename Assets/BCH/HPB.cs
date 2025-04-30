@@ -5,30 +5,32 @@ using UnityEngine.UI;
 
 public class HPB : MonoBehaviour
 {
-    [SerializeField] private PlayerController player; //JWJ √ﬂ∞°
+    [SerializeField] private PlayerController player; //JWJ Ï∂îÍ∞Ä
     [SerializeField]
     private Slider hpbar;
-    private float maxHp;  // JWJ ∞™ ªË¡¶«‘
-    private float curHp;  // JWJ ∞™ ªË¡¶«‘
+    private float maxHp;  // JWJ Í∞í ÏÇ≠Ï†úÌï®
+    private float curHp;  // JWJ Í∞í ÏÇ≠Ï†úÌï®
 
     void Start()
     {
-        maxHp = player.maxHP; //JWJ √ﬂ∞°
-        curHp = player.curHP; //JWJ √ﬂ∞°
+        maxHp = player.maxHP; //JWJ Ï∂îÍ∞Ä
+        curHp = player.curHP; //JWJ Ï∂îÍ∞Ä
+
         hpbar.value = (float)curHp / (float)maxHp;
-        Debug.Log("maxHP ¿˙¿Â"); // JWJ √ﬂ∞°
+        Debug.Log("maxHP Ï†ÄÏû•"); // JWJ Ï∂îÍ∞Ä
+
     }
 
-    private void Update() //JWJ √ﬂ∞°
+    private void Update() //JWJ Ï∂îÍ∞Ä
     {
         curHp = player.curHP;
-        Debug.Log("curHP ¿˙¿Â"); // JWJ √ﬂ∞°
+        //Debug.Log("curHP Ï†ÄÏû•"); // JWJ Ï∂îÍ∞Ä
         HandleHp();
 
     }
     private void HandleHp()
     {
-        Debug.Log("HandleHP »£√‚µ "); // JWJ √ﬂ∞°
+       // Debug.Log("HandleHP Ìò∏Ï∂úÎê®"); // JWJ Ï∂îÍ∞Ä
         hpbar.value = Mathf.Lerp(hpbar.value, (float)curHp / (float)maxHp, Time.deltaTime * 10);
     }
 

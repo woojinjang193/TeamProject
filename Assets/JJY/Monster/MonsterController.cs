@@ -52,6 +52,7 @@ public class MonsterController : MonoBehaviour
     private void TakeDamage(float damage)
     {
         monsterHP -= damage;
+        Debug.Log("몬스터 체력 :" + monsterHP); // 추가
     }
     private void Die()
     {
