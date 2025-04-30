@@ -23,7 +23,6 @@ public class MonsterMover : MonoBehaviour
 
         while (target != null)
         {
-            transform.LookAt(target);
             Vector3 targetPosition = new Vector3(target.position.x, 0, target.position.z);
             pathfinder.SetDestination(targetPosition);
             yield return new WaitForSeconds(delay);
