@@ -16,9 +16,14 @@ public class MonsterCount : MonoBehaviour
     {
         displayedTargetKillCount = TargetKillCount;
         UpdateKillCountUI();
-       
-        MonsterController[] monsters = FindObjectsOfType<MonsterController>();
-        foreach (MonsterController monster in monsters)
+
+        
+    }
+
+
+    public void RegisterMonster(MonsterController monster)
+    {
+        if (monster != null)
         {
             monster.OnDeath += CheckMonsterDeath;
         }
@@ -34,6 +39,7 @@ public class MonsterCount : MonoBehaviour
         if (CurrentKillCount >= TargetKillCount)// 목표 킬수 확인하는 부분
         {
             // 게임클리어 사용 부분
+            Debug.Log("게임 클리어!");
         }
     }
 
