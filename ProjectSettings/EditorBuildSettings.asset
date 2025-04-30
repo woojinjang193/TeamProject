@@ -5,13 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/JDW/Title.unity
     guid: 526cd8e68d1e45840b2283a76c1089ed
   - enabled: 0
     path: Assets/BCH/map.unity
     guid: af440b23df22cd440b0e7177354e472a
-  - enabled: 1
+  - enabled: 0
     path: Assets/JDW/map.unity
     guid: 31fdef01426cb754a9a066c61396087a
+  - enabled: 1
+    path: Assets/JWH/JWH_TestScene/JWH_TestScene02.unity
+    guid: 05938b9b41449924097496935d09887a
+  - enabled: 1
+    path: Assets/JWH/JWH_TestScene/JWH_TestScene.unity
+    guid: a3cceff7655adf1479562c0e123e3186
   m_configObjects: {}
