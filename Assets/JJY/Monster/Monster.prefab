@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterAttack: 1
-  monsterHP: 100
+  monsterHP: 10
   knockbackForce: 30
   knockbackDelay: 0.15
 --- !u!1 &5048399995589890195
