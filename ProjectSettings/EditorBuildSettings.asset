@@ -11,8 +11,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/BCH/map.unity
     guid: af440b23df22cd440b0e7177354e472a
-  - enabled: 0
-    path: Assets/JDW/map.unity
+
+  - enabled: 1
+    path: Assets/JDW/TestMap.unity
+
     guid: 31fdef01426cb754a9a066c61396087a
   - enabled: 1
     path: Assets/JWH/JWH_TestScene/JWH_TestScene02.unity

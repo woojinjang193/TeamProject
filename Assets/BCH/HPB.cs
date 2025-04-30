@@ -15,7 +15,7 @@ public class HPB : MonoBehaviour
     {
         maxHp = player.maxHP; //JWJ 추가
         curHp = player.curHP; //JWJ 추가
-        hpbar.value = (float) curHp / (float) maxHp;
+        hpbar.value = (float)curHp / (float)maxHp;
         Debug.Log("maxHP 저장"); // JWJ 추가
     }
 
