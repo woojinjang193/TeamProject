@@ -8,5 +8,6 @@ public class Title : MonoBehaviour
    public void GameTitle()
     {
         SceneManager.LoadScene("Title");
+
     }
 }
