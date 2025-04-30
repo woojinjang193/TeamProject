@@ -12,19 +12,23 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    [Header("object")]
-    [SerializeField] PlayerController Player;
+   // [SerializeField] private GameObject Player;
+
     //[SerializeField] GameObject Monster;
     //[SerializeField] GameObject timer;
 
     //[SerializeField] PlayerController player;
 
-    
-    
+
+    public UnityEvent OnPlayerDide = new UnityEvent();
+    [Header("Object")]
+    [SerializeField] GameObject Player;
+    [SerializeField] GameObject Monster;
 
    [Header("UI")]
    [SerializeField] GameObject StopUi;
    [SerializeField] GameObject gameOver;
+    [SerializeField] GameObject Timer;
 
 
    [SerializeField] private bool IsPaues;
@@ -48,7 +52,7 @@ public class GameManager : MonoBehaviour
     }
     public void Update()
     {
-        PlayerController player = new PlayerController();
+        
 
         if (Input.GetKeyDown(KeyCode.Q)) // 몬스터와 플레이어 오브젝트 비활성화 와 함께 ui출력
         {
@@ -67,11 +71,12 @@ public class GameManager : MonoBehaviour
             {
                 GameContinue();
             }
-            if (player == false)
-            {
-                GameOver();
-            }
+           
         }
+    }
+    private void OnEnable()
+    {
+        OnPlayerDide.AddListener(GameOver);
     }
     public void GameContinue() //게임 일시정지 해제
     {
@@ -97,6 +102,13 @@ public class GameManager : MonoBehaviour
     {
         //TODO : 캐릭터 사망시 게임오버
         Debug.Log("게임오버");
+        Player.SetActive(false);
+        Monster.SetActive(false);
         gameOver.SetActive(true);
+        Timer.SetActive(false);
+    }
+    private void OnDisable()
+    {
+      //  OnPlayerDide.RemoveListener(GameOver);
     }
 }
