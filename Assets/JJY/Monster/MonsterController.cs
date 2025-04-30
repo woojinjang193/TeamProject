@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -12,6 +13,9 @@ public class MonsterController : MonoBehaviour
 
     private Rigidbody rb;
     private NavMeshAgent agent;
+
+    private bool isDead;
+    public event Action OnDeath;
 
     private void Awake()
     {
@@ -32,10 +36,9 @@ public class MonsterController : MonoBehaviour
                 Knockback(other.transform);
                 Destroy(other.gameObject);
 
-                Debug.Log("몬스터 체력 : " + monsterHP);
                 if (monsterHP <= 0)
                 {
-                    Destroy(gameObject);
+                    Die();
                 }
             }
         }
@@ -49,6 +52,16 @@ public class MonsterController : MonoBehaviour
     private void TakeDamage(float damage)
     {
         monsterHP -= damage;
+        Debug.Log("몬스터 체력 :" + monsterHP); // 추가
+    }
+    private void Die()
+    {
+        isDead = true;
+        if (OnDeath != null)
+        {
+            OnDeath();
+        }
+        Destroy(gameObject);
     }
 
     private void Knockback(Transform bulletTransform)

@@ -28,14 +28,16 @@ public class Timer : MonoBehaviour
 
         if (time <= 0)
         {
-            time = 0; 
-            UpdateTimeUI();
-            // 게임 오버 처리 텍스트만 (타이머가 멈추는 경우)
-            if (GameOverText != null)
-            {
-                GameOverText.gameObject.SetActive(true);// 게임오버 텍스트
-            }
-            enabled = false; // 타이머 멈춤 
+            time = 0;
+            GameManager.Instance.OnTimer.Invoke();
+            //  UpdateTimeUI();
+            //  // 게임 오버 처리 텍스트만 (타이머가 멈추는 경우)
+            //  if (GameOverText != null)
+            //  {
+            //      GameManager.Instance.OnTimer.Invoke();
+            //      //GameOverText.gameObject.SetActive(true);// 게임오버 텍스트
+            //  }
+            //  enabled = false; // 타이머 멈춤 
         }
         else
         {
