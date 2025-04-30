@@ -59,10 +59,6 @@ public class PlayerController : MonoBehaviour
         }
         
     }
-    private void Awake()
-    {
-        _maxHP = playerHP; //초기체력(맥스체력) 저장
-    }
 
 
     private void Move()

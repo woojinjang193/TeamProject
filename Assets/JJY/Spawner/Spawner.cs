@@ -31,7 +31,7 @@ public class Spawner : MonoBehaviour
             spawnMonster.OnDeath += OnMonsterDeath;
         }
 
-        monsterCount.RegisterMonster(spawnMonster);
+        //monsterCount.RegisterMonster(spawnMonster);
     }
 
     void OnMonsterDeath()
