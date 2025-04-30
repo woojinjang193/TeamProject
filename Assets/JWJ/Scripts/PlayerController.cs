@@ -10,13 +10,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float playerHP;
    // [SerializeField] public float playerAttack;
     [SerializeField] float knockbackPower;
+    [SerializeField ]private float mouseSensitivity = 5f;
+    [SerializeField] private Transform Player;
+    [SerializeField] private Transform cameraArm;
 
     //[SerializeField] private Stop pauseScript;
     //[SerializeField] private Animator animator;
 
 
     private Vector3 inputVec;
-    private bool isKnockback = false;
+    public bool isKnockback = false;
 
     void Start()
     {
@@ -32,40 +35,43 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-        PlayerInput();
-        LookAtMouse();
+        LookAround();
         PlayerAttack();
     }
 
- private void PlayerInput()
- {
-     float x = Input.GetAxis("Horizontal");
-     float z = Input.GetAxis("Vertical");
-
-     inputVec = new Vector3(x, 0, z).normalized;
-
- }
 
     private void Move()
     {
-        rigid.velocity = inputVec * playerSpeed;
-    }    
+        Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+       
 
-    private void LookAtMouse()  
-    {
-        Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Plane plane = new Plane(Vector3.up, Vector3.zero);
-        float rayLength;
-        
-        if (plane.Raycast(cameraRay, out rayLength))
-        {
+            Vector3 lookForward = new Vector3(cameraArm.forward.x, 0f, cameraArm.forward.z).normalized;
+            Vector3 lookRight = new Vector3(cameraArm.right.x, 0f, cameraArm.right.z).normalized;
+            Vector3 moveDir = lookForward * moveInput.y + lookRight * moveInput.x;
 
-
-              Vector3 lookDir = cameraRay.GetPoint(rayLength);
-              transform.LookAt(new Vector3(lookDir.x, transform.position.y, lookDir.z));
-
-        }
+            Player.forward = lookForward;
+            transform.position += moveDir * Time.deltaTime * 3f;
     }
+
+    private void LookAround()
+    {
+        Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")) * mouseSensitivity;
+        Vector3 camAngle = cameraArm.rotation.eulerAngles;
+
+        float x = camAngle.x - mouseDelta.y;
+
+        if (x < 180f)
+        {
+            x = Mathf.Clamp(x, -1f, 70f);  // 위쪽 제한
+        }
+        else
+        {
+            x = Mathf.Clamp(x, 335f, 361f); // 아래쪽 제한
+        }
+
+        cameraArm.rotation = Quaternion.Euler(x, camAngle.y + mouseDelta.x, camAngle.z);
+    }
+
 
 
     private void PlayerAttack() 
@@ -110,6 +116,7 @@ private void PlayerTakeDamage(float damage, Transform monsterTransform)
 if (playerHP > 0)
 {
     playerHP -= damage;   // 현재 체력정보 유아이로 넘겨야함
+            
     DamageAction(monsterTransform);
 }
 
@@ -118,7 +125,9 @@ if (playerHP > 0)
 
 private void DamageAction(Transform monsterTransform)
 {
-Vector3 knockback = monsterTransform.forward;
+
+        Debug.Log("플레이어 넉백");
+        Vector3 knockback = monsterTransform.forward;
 
 rigid.velocity = knockback * knockbackPower;
 isKnockback = true;
