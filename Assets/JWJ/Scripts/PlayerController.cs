@@ -35,8 +35,10 @@ public class PlayerController : MonoBehaviour
     }
     void Start() 
     {
+
       // _maxHP = playerHP; //초기체력(맥스체력) 저장
       // Debug.Log("player 체력 초기화");
+
  
     }
 
@@ -56,6 +58,10 @@ public class PlayerController : MonoBehaviour
             PlayerAttack();
         }
         
+    }
+    private void Awake()
+    {
+        _maxHP = playerHP; //초기체력(맥스체력) 저장
     }
 
 

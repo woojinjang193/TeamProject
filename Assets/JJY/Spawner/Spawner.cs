@@ -5,6 +5,7 @@ public class Spawner : MonoBehaviour
 {
     public Wave[] waves;
     public MonsterController monster;
+    public MonsterCount monsterCount;
 
     Wave curWave;                   //현재 웨이브
     int curWaveNum;                 //현재 웨이브의 숫자
@@ -29,6 +30,8 @@ public class Spawner : MonoBehaviour
             MonsterController spawnMonster = Instantiate(monster, Vector3.zero, Quaternion.identity) as MonsterController;
             spawnMonster.OnDeath += OnMonsterDeath;
         }
+
+        monsterCount.RegisterMonster(spawnMonster);
     }
 
     void OnMonsterDeath()
