@@ -36,10 +36,12 @@ public class PlayerController : MonoBehaviour
     void Start() 
     {
 
-      // _maxHP = playerHP; //초기체력(맥스체력) 저장
-      // Debug.Log("player 체력 초기화");
+        AudioManager.instance.PlayBgm(); // BGM 플레이
 
- 
+        // _maxHP = playerHP; //초기체력(맥스체력) 저장
+        // Debug.Log("player 체력 초기화");
+
+
     }
 
     private void FixedUpdate()
@@ -72,6 +74,7 @@ public class PlayerController : MonoBehaviour
 
             Player.forward = lookForward;
             transform.position += moveDir * Time.deltaTime * playerSpeed;
+            
     }
 
     private void LookAround()
@@ -101,7 +104,9 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
+
             shooter.Fire();
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.ArrowRelease); //오디오 재생
             //animator.SetTrigger("Attack");
 
 
@@ -137,7 +142,7 @@ if (collision.gameObject.CompareTag("Monster"))
 
 private void PlayerTakeDamage(float damage, Transform monsterTransform)
 {
-if (playerHP > 0)
+if (playerHP > 0 && isKnockback == false)
 {
     playerHP -= damage;  
     DamageAction(monsterTransform);
@@ -150,6 +155,8 @@ private void DamageAction(Transform monsterTransform)
 {
 
         Debug.Log("플레이어 넉백");
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.PlayerGetDamaged); //오디오 재생
+
         Vector3 knockback = monsterTransform.forward;
 
 rigid.velocity = knockback * knockbackPower;

@@ -41,5 +41,6 @@ public class PooledObject : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         ReturnPool();
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit); //오디오 재생
     }
 }

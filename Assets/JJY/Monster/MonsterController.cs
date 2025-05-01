@@ -34,6 +34,7 @@ public class MonsterController : MonoBehaviour
             {
                 TakeDamage(bullet.bulletDamage);
                 Knockback(other.transform);
+                AudioManager.instance.PlaySfx(AudioManager.Sfx.MonsterGetDamaged); // 오디오 재생
                 Destroy(other.gameObject);
 
                 if (monsterHP <= 0)
