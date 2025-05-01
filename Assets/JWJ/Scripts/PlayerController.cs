@@ -106,7 +106,7 @@ public class PlayerController : MonoBehaviour
         {
 
             shooter.Fire();
-            AudioManager.instance.PlaySfx(AudioManager.Sfx.ArrowRelease); //오디오 재생
+            //AudioManager.instance.PlaySfx(AudioManager.Sfx.ArrowRelease); //오디오 재생
             //animator.SetTrigger("Attack");
 
 
@@ -116,11 +116,16 @@ public class PlayerController : MonoBehaviour
         
 
 
-private void OnCollisionEnter(Collision collision)
+private void OnCollisionEnter(Collision collision)  //플레이어 데미지
 {
 if (collision.gameObject.CompareTag("Monster"))
 {
-    MonsterController monster = collision.gameObject.GetComponent<MonsterController>();
+   // MonsterAniController monsterAni = collision.gameObject.GetComponentInChildren<MonsterAniController>();
+   //
+   //     monsterAni.PlayAttack();
+
+
+            MonsterController monster = collision.gameObject.GetComponent<MonsterController>();
     if (monster != null)
     {
         PlayerTakeDamage(monster.monsterAttack, monster.transform);

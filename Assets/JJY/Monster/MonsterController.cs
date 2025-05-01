@@ -34,7 +34,6 @@ public class MonsterController : MonoBehaviour
             {
                 TakeDamage(bullet.bulletDamage);
                 Knockback(other.transform);
-                AudioManager.instance.PlaySfx(AudioManager.Sfx.MonsterGetDamaged); // 오디오 재생
                 Destroy(other.gameObject);
 
                 if (monsterHP <= 0)
@@ -53,6 +52,7 @@ public class MonsterController : MonoBehaviour
     private void TakeDamage(float damage)
     {
         monsterHP -= damage;
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.MonsterGetDamaged); // JWJ 추가 오디오 재생
         Debug.Log("몬스터 체력 :" + monsterHP); // 추가
     }
     private void Die()
