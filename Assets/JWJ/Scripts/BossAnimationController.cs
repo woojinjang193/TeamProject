@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class BossAnimationController : MonoBehaviour
     private float attackRange = 2.5f;
     private bool isAttacking = false;
     private Transform player;
+    
 
     private void Awake()
     {
@@ -52,7 +54,10 @@ public void BossSpawn()
     //공격 리스트
     public void Dash()
     {
+        Debug.Log("[Dash] SetTrigger 실행 전");
         animator.SetTrigger("Dash");
+        Debug.Log("[Dash] SetTrigger 실행 후");
+
     }
 
     public void RightAttack()
@@ -86,7 +91,7 @@ public void BossSpawn()
 
         else
         {
-            int random = Random.Range(0, 3); // 0, 1, 2 중 하나
+            int random = UnityEngine.Random.Range(0, 3); // 0, 1, 2 중 하나
 
             switch (random)
             {
