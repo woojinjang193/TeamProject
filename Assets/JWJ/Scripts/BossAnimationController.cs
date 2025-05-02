@@ -20,6 +20,8 @@ public class BossAnimationController : MonoBehaviour
 
     private void Update()
     {
+        
+
         float distance = Vector3.Distance(transform.position, player.position); //플레이어까지 거리
        // Debug.Log("플레이어까지 거리: " + distance);
 
@@ -29,10 +31,19 @@ public class BossAnimationController : MonoBehaviour
             isAttacking = true;
             Invoke(nameof(AttackDelay), 2f); // 공격 딜레이
         }
+
+
     }
 
-    //스폰애니
-    public void BossSpawn()
+    public void BossDied()
+    {
+        Debug.Log("보스 죽음");
+        animator.SetTrigger("Die");
+     }
+
+
+//스폰애니
+public void BossSpawn()
     {
         animator.SetTrigger("Spawn");
     }
@@ -68,21 +79,28 @@ public class BossAnimationController : MonoBehaviour
 
     private void RandomAttack()
     {
-        int random = Random.Range(0, 3); // 0, 1, 2 중 하나
-
-        switch (random)
+        if (BossController.isDead == true)
         {
-            case 0:
-                RightAttack();
-                break;
-            case 1:
-                LeftAttack();
-                break;
-            case 2:
-                BiteAttack();
-                break;
+            return;
         }
 
+        else
+        {
+            int random = Random.Range(0, 3); // 0, 1, 2 중 하나
+
+            switch (random)
+            {
+                case 0:
+                    RightAttack();
+                    break;
+                case 1:
+                    LeftAttack();
+                    break;
+                case 2:
+                    BiteAttack();
+                    break;
+            }
+        }
         
     }
 }

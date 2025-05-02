@@ -14,7 +14,7 @@ public class BossController : MonoBehaviour
     private Rigidbody rb;
     private NavMeshAgent agent;
 
-    private bool isDead;
+    public bool isDead;
     public event Action OnDeath;
     private BossAnimationController animController;
 
@@ -51,7 +51,11 @@ public class BossController : MonoBehaviour
 
                 if (bossHP <= 0)
                 {
+                    isDead = true;
+                    agent.enabled = false;
+                    animController.BossDied(); //보스 죽는모션
                     Die();
+                    
                 }
             }
         }
@@ -59,7 +63,7 @@ public class BossController : MonoBehaviour
 
     void Update()
     {
-        if (agent.enabled && target != null)
+        if (!isDead && agent.enabled && target != null)
         {
             agent.SetDestination(target.position);
         }
@@ -73,11 +77,22 @@ public class BossController : MonoBehaviour
     }
     private void Die()
     {
-        isDead = true;
+        
+
+        
+        Invoke(nameof(DeathDelay), 3f); //사라지는 시간 딜레이
+        
+
         if (OnDeath != null)
         {
             OnDeath();
+ 
         }
+        
+    }
+
+    private void DeathDelay()
+    {
         Destroy(gameObject);
     }
 

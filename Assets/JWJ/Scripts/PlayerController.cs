@@ -124,7 +124,7 @@ if (collision.gameObject.CompareTag("Monster"))
     MonsterController monster = collision.gameObject.GetComponent<MonsterController>();
     BossController boss = collision.gameObject.GetComponent<BossController>();
 
-    if (monster != null)
+    if (monster != null)  //몬스터한테 데미지
     {
         PlayerTakeDamage(monster.monsterAttack, monster.transform);
         Debug.Log("플레이어 체력" + playerHP);
@@ -139,8 +139,9 @@ if (collision.gameObject.CompareTag("Monster"))
         }
     }
 
-    if (boss != null)
+    if (boss != null)  // 보스한테 데미지
     {
+               
         PlayerTakeDamage(boss.bossAttack, boss.transform);
         Debug.Log("플레이어 체력" + playerHP);
 
@@ -158,11 +159,18 @@ if (collision.gameObject.CompareTag("Monster"))
 
 private void PlayerTakeDamage(float damage, Transform monsterTransform)
 {
-if (playerHP > 0 && isKnockback == false)
-{
-    playerHP -= damage;  
-    DamageAction(monsterTransform);
-}
+        BossController boss = monsterTransform.GetComponent<BossController>();
+
+        if (boss != null && boss.isDead)
+        {
+            return;
+        }
+
+        else if (playerHP > 0 && isKnockback == false)
+        {
+                   playerHP -= damage;  
+                DamageAction(monsterTransform);
+        }
 
 
 }
