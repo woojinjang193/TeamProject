@@ -25,7 +25,12 @@ public class MonsterCount : MonoBehaviour
     {
         if (monster != null)
         {
+            Debug.Log("몬스터 등록 시도");
             monster.OnDeath += CheckMonsterDeath;
+        }
+        else
+        {
+            Debug.LogWarning("등록하려는 몬스터가 null입니다.");
         }
     }
 
