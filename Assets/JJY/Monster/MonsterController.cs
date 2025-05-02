@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 public class MonsterController : MonoBehaviour
 {
@@ -9,33 +11,34 @@ public class MonsterController : MonoBehaviour
     [SerializeField] public float monsterHP;
 
     [SerializeField] public float knockbackForce = 10f;
-    [SerializeField] public float knockbackDelay = 0.01f;
+    [SerializeField] public float knockbackDelay = 0.1f;
 
     private Rigidbody rb;
     private NavMeshAgent agent;
+    private Collider collider;
 
     private bool isDead;
     public event Action OnDeath;
 
     private void Awake()
     {
+        collider = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
     }
 
     
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.gameObject.CompareTag("Bullet"))
+        if (collision.gameObject.CompareTag("Bullet"))
         {
-            Bullet bullet = other.gameObject.GetComponent<Bullet>();
+            Bullet bullet = collision.gameObject.GetComponent<Bullet>();
             if (bullet != null)
             {
                 TakeDamage(bullet.bulletDamage);
-                Knockback(other.transform);
-                Destroy(other.gameObject);
-
+                Knockback(collision.transform);
+                
                 if (monsterHP <= 0)
                 {
                     Die();
@@ -58,11 +61,28 @@ public class MonsterController : MonoBehaviour
     private void Die()
     {
         isDead = true;
+        collider.isTrigger = true;
+
         if (OnDeath != null)
         {
             OnDeath();
         }
-        Destroy(gameObject);
+
+        if (agent != null)
+        {
+            agent.isStopped = true;    
+            agent.ResetPath();         
+        }
+
+        if (rb != null)
+        {
+            rb.velocity = Vector3.zero;
+        }
+
+    }
+    public bool IsDead()
+    {
+        return isDead;
     }
 
     private void Knockback(Transform bulletTransform)
