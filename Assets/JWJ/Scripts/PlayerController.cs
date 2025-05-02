@@ -120,12 +120,10 @@ private void OnCollisionEnter(Collision collision)  //플레이어 데미지
 {
 if (collision.gameObject.CompareTag("Monster"))
 {
-   // MonsterAniController monsterAni = collision.gameObject.GetComponentInChildren<MonsterAniController>();
-   //
-   //     monsterAni.PlayAttack();
 
+    MonsterController monster = collision.gameObject.GetComponent<MonsterController>();
+    BossController boss = collision.gameObject.GetComponent<BossController>();
 
-            MonsterController monster = collision.gameObject.GetComponent<MonsterController>();
     if (monster != null)
     {
         PlayerTakeDamage(monster.monsterAttack, monster.transform);
@@ -141,8 +139,21 @@ if (collision.gameObject.CompareTag("Monster"))
         }
     }
 
+    if (boss != null)
+    {
+        PlayerTakeDamage(boss.bossAttack, boss.transform);
+        Debug.Log("플레이어 체력" + playerHP);
 
-}
+        if (playerHP <= 0)
+        {
+            Debug.Log("으앙 쥬금ㅠ");
+
+            gameObject.SetActive(false);
+            GameManager.Instance.OnPlayerDide.Invoke();
+
+        }
+    }
+ }
 }
 
 private void PlayerTakeDamage(float damage, Transform monsterTransform)
@@ -166,7 +177,7 @@ private void DamageAction(Transform monsterTransform)
 
 rigid.velocity = knockback * knockbackPower;
 isKnockback = true;
-Invoke(nameof(EndKnockback), 0.5f);
+Invoke(nameof(EndKnockback), 0.5f);  // 넉백 시간
 }
 
 private void EndKnockback()
