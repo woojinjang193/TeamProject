@@ -769,7 +769,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anima: {fileID: 0}
-  deathdelay: 1.5
+  deathdelay: 2
 --- !u!4 &5049054376138469007 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8672787908860998894, guid: a128beb21d35ea341957f6ea317bd28d, type: 3}

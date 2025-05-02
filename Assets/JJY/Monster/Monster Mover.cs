@@ -35,7 +35,7 @@ public class MonsterMover : MonoBehaviour
 
         while (target != null)
         {
-            if(deadController != null && deadController.IsDead())
+            if (deadController != null && deadController.IsDead())
             {
                 yield break;
             }
