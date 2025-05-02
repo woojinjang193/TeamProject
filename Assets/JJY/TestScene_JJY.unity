@@ -122,6 +122,63 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 8962751befa27734a9e9b859ca7fcf16, type: 2}
+--- !u!1001 &335130207
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2853821811672106162, guid: a282261e6d1cf734094d8ed3e0c92599, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.76968455
+      objectReference: {fileID: 0}
+    - target: {fileID: 2853821811672106162, guid: a282261e6d1cf734094d8ed3e0c92599, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5000019
+      objectReference: {fileID: 0}
+    - target: {fileID: 2853821811672106162, guid: a282261e6d1cf734094d8ed3e0c92599, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.30784607
+      objectReference: {fileID: 0}
+    - target: {fileID: 2853821811672106162, guid: a282261e6d1cf734094d8ed3e0c92599, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2853821811672106162, guid: a282261e6d1cf734094d8ed3e0c92599, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2853821811672106162, guid: a282261e6d1cf734094d8ed3e0c92599, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2853821811672106162, guid: a282261e6d1cf734094d8ed3e0c92599, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2853821811672106162, guid: a282261e6d1cf734094d8ed3e0c92599, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2853821811672106162, guid: a282261e6d1cf734094d8ed3e0c92599, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2853821811672106162, guid: a282261e6d1cf734094d8ed3e0c92599, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5356950632354771131, guid: a282261e6d1cf734094d8ed3e0c92599, type: 3}
+      propertyPath: m_Name
+      value: Spider Monster
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a282261e6d1cf734094d8ed3e0c92599, type: 3}
 --- !u!1 &1154891500
 GameObject:
   m_ObjectHideFlags: 0
@@ -860,3 +917,4 @@ SceneRoots:
   - {fileID: 1252947041}
   - {fileID: 1312709367}
   - {fileID: 1861128595}
+  - {fileID: 335130207}
