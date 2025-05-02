@@ -7,20 +7,7 @@ using UnityEngine.SceneManagement;
 public class Play : MonoBehaviour
 {
     public float delay = 2f;
-
-
-    public void Awake()
-    {
-        Debug.Log("플레이오브젝트 활성화됨");
-    }
-    public void OnEnable()
-    {
-        Debug.Log("오브젝트가 살아있음");
-    }
-    public void OnDestroy()
-    {
-        Debug.Log("오브젝트가 파괴됨");
-    }
+   
     public void LoadSceneWithDelay(string sceneName)
     {
         StartCoroutine(LoadSceneCoroutine(sceneName));

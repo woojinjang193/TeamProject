@@ -216,6 +216,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &824636916 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 64967498598911914, guid: 5fcf05b72f5afbb429bdffd99796fb24, type: 3}
+  m_PrefabInstance: {fileID: 7564137950546357523}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &824636917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824636916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 305f45e2b4461c4449af613e9f85f61e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &960355784
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,8 +268,8 @@ Camera:
   m_GameObject: {fileID: 960355784}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -471,7 +488,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 64967498598911914, guid: 5fcf05b72f5afbb429bdffd99796fb24, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 824636917}
   m_SourcePrefab: {fileID: 100100000, guid: 5fcf05b72f5afbb429bdffd99796fb24, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
