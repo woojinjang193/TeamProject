@@ -1,14 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 using UnityEngine.SceneManagement;
 
 public class Play : MonoBehaviour
 {
+    public float delay = 2f;
+
+
+    public void Awake()
+    {
+        Debug.Log("플레이오브젝트 활성화됨");
+    }
+    public void OnEnable()
+    {
+        Debug.Log("오브젝트가 살아있음");
+    }
+    public void OnDestroy()
+    {
+        Debug.Log("오브젝트가 파괴됨");
+    }
+    public void LoadSceneWithDelay(string sceneName)
+    {
+        StartCoroutine(LoadSceneCoroutine(sceneName));
+    }
+    private IEnumerator LoadSceneCoroutine(string sceneName)
+    {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene(sceneName);
+    }
   
     public void GamePlay()
     {
-        //Debug.Log("게임시작"); //TO DO : 다음 씬 만들어야됨
-        SceneManager.LoadScene("TestMap");
+        Debug.Log("게임시작"); 
+        LoadSceneWithDelay("TestMap");
+        
     }
+   
 }
