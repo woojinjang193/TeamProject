@@ -25,7 +25,12 @@ public class MonsterCount : MonoBehaviour
     {
         if (monster != null)
         {
+            Debug.Log("몬스터 등록 시도");
             monster.OnDeath += CheckMonsterDeath;
+        }
+        else
+        {
+            Debug.LogWarning("등록하려는 몬스터가 null입니다.");
         }
     }
 
@@ -47,7 +52,11 @@ public class MonsterCount : MonoBehaviour
     {
         if (KillCount != null)
         {
-            KillCount.text = string.Format("남은 목표: {0}", displayedTargetKillCount);
+            KillCount.text = string.Format("{0}", displayedTargetKillCount);
+            if(displayedTargetKillCount <= 0)
+            {
+                GameManager.Instance.OnMonsterCount.Invoke();
+            }
         }
     }
 

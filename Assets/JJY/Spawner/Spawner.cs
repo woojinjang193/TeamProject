@@ -28,11 +28,14 @@ public class Spawner : MonoBehaviour
             nextSpawnTime = Time.time + curWave.timeBetweenSpawn;
 
             MonsterController spawnMonster = Instantiate(monster, Vector3.zero, Quaternion.identity) as MonsterController;
+            
+            monsterCount.RegisterMonster(spawnMonster);//몬스터카운트
+            
             spawnMonster.OnDeath += OnMonsterDeath;
         }
-
-        //monsterCount.RegisterMonster(spawnMonster);
     }
+
+        
 
     void OnMonsterDeath()
     {

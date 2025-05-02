@@ -49,4 +49,5 @@ MonoBehaviour:
     timeBetweenSpawn: 2
   - monsterCount: 5
     timeBetweenSpawn: 1
-  monster: {fileID: 841350088339707826, guid: 4aef5787fd16088499cb29198e80fc05, type: 3}
+  monster: {fileID: 7163193128688685175, guid: a282261e6d1cf734094d8ed3e0c92599, type: 3}
+  monsterCount: {fileID: 0}
