@@ -10,7 +10,7 @@ public class Potal : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player"))// 플레이어 태그 탐색
         {
             if (targetSceneName == null)
             {
@@ -20,7 +20,7 @@ public class Potal : MonoBehaviour
 
             
 
-            if (savePlayer != null)
+            if (savePlayer != null) // 체력저장
             {
                 savePlayer.SaveHp();
             }
