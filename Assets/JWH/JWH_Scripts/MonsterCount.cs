@@ -52,7 +52,11 @@ public class MonsterCount : MonoBehaviour
     {
         if (KillCount != null)
         {
-            KillCount.text = string.Format("남은 목표: {0}", displayedTargetKillCount);
+            KillCount.text = string.Format("{0}", displayedTargetKillCount);
+            if(displayedTargetKillCount <= 0)
+            {
+                GameManager.Instance.OnMonsterCount.Invoke();
+            }
         }
     }
 

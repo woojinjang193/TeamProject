@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public UnityEvent OnTimer = new UnityEvent();
     public UnityEvent OnPlayerDide = new UnityEvent();
     public UnityEvent OnMonsterTimer = new UnityEvent();
+    public UnityEvent OnMonsterCount = new UnityEvent();
 
     [Header("Object")]
     [SerializeField] GameObject Player;
@@ -29,12 +30,14 @@ public class GameManager : MonoBehaviour
    // [SerializeField] GameObject Spawner;
 
    [Header("UI")]
-   [SerializeField] GameObject StopUi;
-   [SerializeField] GameObject gameOver;
-    [SerializeField] GameObject Timer;
-    [SerializeField] GameObject HpB;
-    [SerializeField] GameObject gameClear;
+   [SerializeField] GameObject StopUi;//일시정지 ui
+   [SerializeField] GameObject gameOver;//게임오버ui
+    [SerializeField] GameObject Timer;//타이머ui
+    [SerializeField] GameObject HpB;//체력바
+    [SerializeField] GameObject gameClear;//게임클리어
     [SerializeField] GameObject timer;
+    [SerializeField] GameObject monsterCount;//몬스터카운트
+    [SerializeField] GameObject potal;
     
 
    
@@ -80,6 +83,7 @@ public class GameManager : MonoBehaviour
                 IsPaues = true;
                 HpB.SetActive(false);
                 timer.SetActive(false);
+                monsterCount.SetActive(false);
                 //Monster.SetActive(false);
                // Player.SetActive(false);
                 //Spawner.SetActive(false);
@@ -95,7 +99,14 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         OnPlayerDide.AddListener(GameOver);
-        OnTimer.AddListener(GameClear);
+        OnTimer.AddListener(GameOver);
+       // OnMonsterCount.AddListener(Potal); 2스테이지 만들때 추가
+        OnMonsterCount.AddListener(GameClear);
+    }
+    private void Potal()
+    {
+        potal.SetActive(true);
+        monsterCount.SetActive(false);
     }
     public void GameContinue() //게임 일시정지 해제
     {
@@ -106,9 +117,10 @@ public class GameManager : MonoBehaviour
         Player.SetActive(true);
         HpB.SetActive(true);
         timer.SetActive(true);
-      // Monster.SetActive(true);
-      // Player.SetActive(true);
-      // Spawner.SetActive(true);
+        monsterCount.SetActive(true);
+        // Monster.SetActive(true);
+        // Player.SetActive(true);
+        // Spawner.SetActive(true);
 
         IsPaues = false;
     }
@@ -140,6 +152,7 @@ public class GameManager : MonoBehaviour
         Player.SetActive(false);
         Timer.SetActive(false);
         HpB.SetActive(false);
+        monsterCount.SetActive(false); 
     }
 
 }

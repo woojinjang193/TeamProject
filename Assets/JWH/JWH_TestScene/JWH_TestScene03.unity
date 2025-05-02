@@ -757,6 +757,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anima: {fileID: 0}
+  deathdelay: 1.5
 --- !u!4 &119347192 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: d70159562a69a2146aaab4233271236c, type: 3}
@@ -6393,7 +6394,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4386093229805744549, guid: 5d2669776d0811a47ab2afcc48a77f03, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4386093229805744549, guid: 5d2669776d0811a47ab2afcc48a77f03, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6401,7 +6402,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4386093229805744549, guid: 5d2669776d0811a47ab2afcc48a77f03, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 10.12
       objectReference: {fileID: 0}
     - target: {fileID: 4386093229805744549, guid: 5d2669776d0811a47ab2afcc48a77f03, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7425,6 +7426,9 @@ MonoBehaviour:
   OnMonsterTimer:
     m_PersistentCalls:
       m_Calls: []
+  OnMonsterCount:
+    m_PersistentCalls:
+      m_Calls: []
   Player: {fileID: 0}
   Monster: {fileID: 0}
   StopUi: {fileID: 333434632}
@@ -7433,6 +7437,8 @@ MonoBehaviour:
   HpB: {fileID: 0}
   gameClear: {fileID: 0}
   timer: {fileID: 0}
+  monsterCount: {fileID: 0}
+  potal: {fileID: 0}
   IsPaues: 0
 --- !u!4 &1104835643
 Transform:
