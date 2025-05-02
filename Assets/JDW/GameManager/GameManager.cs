@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     [Header("Object")]
     [SerializeField] GameObject Player;
     [SerializeField] GameObject Monster;
+   // [SerializeField] GameObject Spawner;
 
    [Header("UI")]
    [SerializeField] GameObject StopUi;
@@ -79,8 +80,9 @@ public class GameManager : MonoBehaviour
                 IsPaues = true;
                 HpB.SetActive(false);
                 timer.SetActive(false);
-                //  Monster.SetActive(false);
-                //  Player.SetActive(false);
+                //Monster.SetActive(false);
+               // Player.SetActive(false);
+                //Spawner.SetActive(false);
                 return;
             }
             if (IsPaues == true)
@@ -104,8 +106,9 @@ public class GameManager : MonoBehaviour
         Player.SetActive(true);
         HpB.SetActive(true);
         timer.SetActive(true);
-        //  Monster.SetActive(true);
-        //  Player.SetActive(true);
+      // Monster.SetActive(true);
+      // Player.SetActive(true);
+      // Spawner.SetActive(true);
 
         IsPaues = false;
     }
