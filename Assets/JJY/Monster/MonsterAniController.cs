@@ -11,7 +11,7 @@ public class SpiderAniController : MonoBehaviour
     private bool isAttacking;
     private bool isDead = false;
 
-    [SerializeField] float deathdelay = 1.5f;
+    [SerializeField] float deathdelay = 2f;
 
     // Start is called before the first frame update
     void Start()
