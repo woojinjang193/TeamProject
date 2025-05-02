@@ -14,7 +14,7 @@ public class SavePlayer : MonoBehaviour
         {
             //playerHpSave = 
                 PlayerPrefs.SetFloat("PlayerHealth", playerController.playerHP);
-
+            PlayerPrefs.Save();
             Debug.Log($"{playerController.playerHP}플레이어 체력 저장");
         }
         else
