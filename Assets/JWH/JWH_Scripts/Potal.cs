@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Potal : MonoBehaviour
 {
+    public static Potal PotalInstance;
     public string targetSceneName;
     public SavePlayer savePlayer;
 

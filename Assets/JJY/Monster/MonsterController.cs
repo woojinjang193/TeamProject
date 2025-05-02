@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
-using UnityEditorInternal;
+
+//using UnityEditorInternal; ì´ê±° ë­ì§€
+
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UIElements;
@@ -55,8 +57,8 @@ public class MonsterController : MonoBehaviour
     private void TakeDamage(float damage)
     {
         monsterHP -= damage;
-        AudioManager.instance.PlaySfx(AudioManager.Sfx.MonsterGetDamaged); // JWJ Ãß°¡ ¿Àµğ¿À Àç»ı
-        Debug.Log("¸ó½ºÅÍ Ã¼·Â :" + monsterHP); // Ãß°¡
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.MonsterGetDamaged); // JWJ ì¶”ê°€ ì˜¤ë””ì˜¤ ì¬ìƒ
+        Debug.Log("ëª¬ìŠ¤í„° ì²´ë ¥ :" + monsterHP); // ì¶”ê°€
     }
     private void Die()
     {

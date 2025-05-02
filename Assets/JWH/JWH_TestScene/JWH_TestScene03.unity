@@ -6333,7 +6333,9 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4386093229805744549, guid: 5d2669776d0811a47ab2afcc48a77f03, type: 3}
       propertyPath: m_LocalPosition.x
+
       value: 1.29
+
       objectReference: {fileID: 0}
     - target: {fileID: 4386093229805744549, guid: 5d2669776d0811a47ab2afcc48a77f03, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6341,7 +6343,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4386093229805744549, guid: 5d2669776d0811a47ab2afcc48a77f03, type: 3}
       propertyPath: m_LocalPosition.z
+
       value: 8.71
+
       objectReference: {fileID: 0}
     - target: {fileID: 4386093229805744549, guid: 5d2669776d0811a47ab2afcc48a77f03, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7369,6 +7373,9 @@ MonoBehaviour:
   OnMonsterTimer:
     m_PersistentCalls:
       m_Calls: []
+  OnMonsterCount:
+    m_PersistentCalls:
+      m_Calls: []
   Player: {fileID: 0}
   Monster: {fileID: 0}
   StopUi: {fileID: 333434632}
@@ -7377,6 +7384,8 @@ MonoBehaviour:
   HpB: {fileID: 0}
   gameClear: {fileID: 0}
   timer: {fileID: 0}
+  monsterCount: {fileID: 0}
+  potal: {fileID: 0}
   IsPaues: 0
 --- !u!4 &1104835643
 Transform:
