@@ -150,7 +150,7 @@ public class BossController : MonoBehaviour
     private void TakeDamage(float damage)
     {
         bossHP -= damage;
-        AudioManager.instance.PlaySfx(AudioManager.Sfx.MonsterGetDamaged); // JWJ 추가 오디오 재생
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.MonsterGetDamaged); // 오디오 재생
         Debug.Log("몬스터 체력 :" + bossHP); // 추가
     }
     private void Die()
@@ -158,7 +158,7 @@ public class BossController : MonoBehaviour
 
 
 
-        Invoke(nameof(DeathDelay), 3f); //사라지는 시간 딜레이
+        Invoke(nameof(DeathDelay), 7f); //사라지는 시간 딜레이
 
 
         if (OnDeath != null)

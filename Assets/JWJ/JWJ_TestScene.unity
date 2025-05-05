@@ -1834,7 +1834,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &316328046
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2434,12 +2434,22 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e0ffd606cda51c8468abf2e2eea4bc96, type: 3}
   - {fileID: 8300000, guid: 4e1b4a97b1617c245a97fdbe7c4c0636, type: 3}
   - {fileID: 8300000, guid: e6d00863ac16c79449af403dc76c5ec0, type: 3}
-  - {fileID: 8300000, guid: f9415d141992e429880c6d91fe6f742e, type: 3}
+  - {fileID: 8300000, guid: 4dff595816ebc9240b10da8caad11584, type: 3}
+  - {fileID: 8300000, guid: c9794cead6ed8a94286ac45f222b35e7, type: 3}
+  - {fileID: 8300000, guid: 2b48eb119d844b24fa67831f87465725, type: 3}
+  - {fileID: 8300000, guid: 986a6d7f399a50c4a93a90461255681b, type: 3}
+  - {fileID: 8300000, guid: b7734ce3ce7c6f544bd828fe9619fe96, type: 3}
+  - {fileID: 8300000, guid: c9794cead6ed8a94286ac45f222b35e7, type: 3}
   sfxVolumes:
   - 0.2
   - 0.1
   - 0.2
   - 0.2
+  - 0.6
+  - 0.6
+  - 0.6
+  - 0.6
+  - 0.6
   - 0.6
   channels: 16
 --- !u!4 &364287224
@@ -3842,7 +3852,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &619845827
 Transform:
   m_ObjectHideFlags: 0
@@ -14426,6 +14436,10 @@ PrefabInstance:
       propertyPath: dashTryTime
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6868774726604729453, guid: 9f7d44a1d3075ee478eaceca823d45d1, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: e8e6405f9060fd9429ce988f6ada4798, type: 2}
     - target: {fileID: 7675883659488173413, guid: 9f7d44a1d3075ee478eaceca823d45d1, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
