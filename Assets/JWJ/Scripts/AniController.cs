@@ -80,11 +80,11 @@ public class AniController : MonoBehaviour
         if (playerController.isKnockback && !wasKnockback)
         {
 
-            if (playerController.isHitByBoss == true && bossController.isDashing == true)
+            if (playerController.isHitByBoss && bossController.isDashing)
             {
-                anima.SetBool("isHitByDash", true);
+                anima.SetTrigger("isHitByDash");
                 wasKnockback = true;
-                Debug.Log("플레이어 보스 대쉬 넉백모션");
+                Debug.Log("보스 넉백 모션 실행");
             }
 
             if (playerController.isHitByMonter == true)

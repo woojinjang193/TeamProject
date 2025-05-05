@@ -116,7 +116,7 @@ public class BossController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Bullet"))
+        if (collision.gameObject.CompareTag("Bullet") && !isDead)
         {
             Bullet bullet = collision.gameObject.GetComponent<Bullet>();
             if (bullet != null)
