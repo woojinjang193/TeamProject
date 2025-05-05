@@ -157,7 +157,7 @@ public class BossController : MonoBehaviour
     {
 
 
-
+        agent.enabled = false;
         Invoke(nameof(DeathDelay), 7f); //사라지는 시간 딜레이
 
 
