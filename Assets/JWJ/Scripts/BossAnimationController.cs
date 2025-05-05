@@ -27,7 +27,7 @@ public class BossAnimationController : MonoBehaviour
         float distance = Vector3.Distance(transform.position, player.position); //플레이어까지 거리
        // Debug.Log("플레이어까지 거리: " + distance);
 
-        if (distance < attackRange && isAttacking == false)
+        if (distance < attackRange && isAttacking == false && BossController.isDashing == false)
         {
             RandomAttack();
             isAttacking = true;
@@ -54,10 +54,7 @@ public void BossSpawn()
     //공격 리스트
     public void Dash()
     {
-        Debug.Log("[Dash] SetTrigger 실행 전");
         animator.SetTrigger("Dash");
-        Debug.Log("[Dash] SetTrigger 실행 후");
-
     }
 
     public void RightAttack()
