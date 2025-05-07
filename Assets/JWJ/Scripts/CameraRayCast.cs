@@ -4,13 +4,7 @@ using UnityEngine;
 
 public class CameraRayCast : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
     [SerializeField] private Transform character;
     private Renderer obstacleRenderer;
 
@@ -31,7 +25,7 @@ public class CameraRayCast : MonoBehaviour
 
                 obstacleRenderer = hitRenderer;
 
-                // 머티리얼 알파 조정
+                // 매테리얼 투명도 조정: 이유는 모르겠는데 맵 오브잭트들이 일정 투명도 아래로 내려가면 그냥 투명으로 변함
                 Material mat = obstacleRenderer.material;
                 Color c = mat.color;
                 c.a = 0.3f;
