@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -10,14 +12,31 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float playerHP;
    // [SerializeField] public float playerAttack;
     [SerializeField] float knockbackPower;
-    [SerializeField ]private float mouseSensitivity = 5f;
+    [SerializeField] float bossKnockbackPower;
+    [SerializeField] private float mouseSensitivity = 5f;
     [SerializeField] private Transform Player;
     [SerializeField] private Transform cameraArm;
+    [SerializeField] private float rollSpeed;
+    [SerializeField] private AniController aniController;
+
+
+
 
     //[SerializeField] private Stop pauseScript;
     //[SerializeField] private Animator animator;
     private float _maxHP;  // 맥스체력 저장공간
     public bool isKnockback = false;
+    public bool isHitByMonter = false;
+    public bool isHitByBoss = false;
+    public bool isRolling = false;
+
+    private float rollTime = 0.5f;
+    private float lastRollTime;
+    [SerializeField] private float rollCooldown = 1;
+
+    private Vector3 rollDirection;
+    BossController bosscontroller;
+
 
     public float maxHP  
     {
@@ -37,7 +56,9 @@ public class PlayerController : MonoBehaviour
     {
 
         AudioManager.instance.PlayBgm(); // BGM 플레이
-
+        GameObject bossObj = GameObject.FindWithTag("Boss");
+        bosscontroller = bossObj.GetComponent<BossController>();
+        //aniController = GetComponentInChildren <AniController>();
         // _maxHP = playerHP; //초기체력(맥스체력) 저장
         // Debug.Log("player 체력 초기화");
 
@@ -50,6 +71,7 @@ public class PlayerController : MonoBehaviour
         {
             Move();
         }
+
     }
     void Update()
     {
@@ -59,23 +81,59 @@ public class PlayerController : MonoBehaviour
         {
             PlayerAttack();
         }
-        
+
+       
+
+        if (Input.GetKeyDown(KeyCode.Space) && !isRolling && Time.time >= lastRollTime + rollCooldown)
+        {
+            Debug.Log("구르기");
+            aniController.Rolling();
+            lastRollTime = Time.time;
+
+            rollDirection = new Vector3(cameraArm.forward.x, 0, cameraArm.forward.z).normalized;
+            StartCoroutine(Roll());
+        }
+
+
     }
 
 
     private void Move()
     {
         Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-       
 
-            Vector3 lookForward = new Vector3(cameraArm.forward.x, 0f, cameraArm.forward.z).normalized;
-            Vector3 lookRight = new Vector3(cameraArm.right.x, 0f, cameraArm.right.z).normalized;
-            Vector3 moveDir = (lookForward * moveInput.y + lookRight * moveInput.x).normalized;
+        Vector3 lookForward = new Vector3(cameraArm.forward.x, 0f, cameraArm.forward.z).normalized;
+        Vector3 lookRight = new Vector3(cameraArm.right.x, 0f, cameraArm.right.z).normalized;
+        Vector3 moveDir = (lookForward * moveInput.y + lookRight * moveInput.x).normalized;
 
-            Player.forward = lookForward;
+        Player.forward = lookForward;
+
+        if (!isRolling)
+        {
             transform.position += moveDir * Time.deltaTime * playerSpeed;
-            
+        }
+
+
     }
+
+    private IEnumerator Roll()
+    {
+        isRolling = true;
+        
+        float timer = 0f;  // 타이머
+
+        while (timer < rollTime)
+        {
+            transform.position += rollDirection * rollSpeed * Time.deltaTime;
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(0.3f); 
+        isRolling = false;
+        Debug.Log("구르기 종료 → 다시 구를 수 있음");
+    }
+
 
     private void LookAround()
     {
@@ -118,7 +176,7 @@ public class PlayerController : MonoBehaviour
 
 private void OnCollisionEnter(Collision collision)  //플레이어 데미지
 {
-if (collision.gameObject.CompareTag("Monster"))
+if (collision.gameObject.CompareTag("Monster") || collision.gameObject.CompareTag("Boss"))
 {
 
     MonsterController monster = collision.gameObject.GetComponent<MonsterController>();
@@ -177,19 +235,36 @@ private void PlayerTakeDamage(float damage, Transform monsterTransform)
 
 private void DamageAction(Transform monsterTransform)
 {
-
+        
         Debug.Log("플레이어 넉백");
         AudioManager.instance.PlaySfx(AudioManager.Sfx.PlayerGetDamaged); //오디오 재생
 
-        Vector3 knockback = monsterTransform.forward;
+        Vector3 knockback;
 
-rigid.velocity = knockback * knockbackPower;
-isKnockback = true;
-Invoke(nameof(EndKnockback), 0.5f);  // 넉백 시간
+        if (monsterTransform.CompareTag("Boss") && bosscontroller.isDashing == true)
+        {
+            knockback = (transform.position - monsterTransform.position).normalized;
+            rigid.velocity = knockback * bossKnockbackPower;
+            isHitByBoss = true;
+            isKnockback = true;
+            Invoke(nameof(EndKnockback), 2f);  // 넉백 시간
+        }
+        else
+        {
+            knockback = monsterTransform.forward;
+            rigid.velocity = knockback * knockbackPower;
+            isHitByMonter = true;
+            isKnockback = true;
+            Invoke(nameof(EndKnockback), 0.5f);  // 넉백 시간
+        }
+
+        
 }
 
 private void EndKnockback()
-{
-isKnockback = false;
-}
+    {
+        isKnockback = false;
+        isHitByBoss = false;
+        isHitByMonter = false;
+    }
 }

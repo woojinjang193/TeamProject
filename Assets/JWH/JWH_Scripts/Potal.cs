@@ -5,13 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class Potal : MonoBehaviour
 {
-    public static Potal PotalInstance;
     public string targetSceneName;
     public SavePlayer savePlayer;
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))// 플레이어 태그 탐색
+        if (other.CompareTag("Player"))
         {
             if (targetSceneName == null)
             {
@@ -21,7 +20,7 @@ public class Potal : MonoBehaviour
 
             
 
-            if (savePlayer != null) // 체력저장
+            if (savePlayer != null)
             {
                 savePlayer.SaveHp();
             }

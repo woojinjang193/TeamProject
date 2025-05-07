@@ -14,7 +14,7 @@ public class SavePlayer : MonoBehaviour
         {
             //playerHpSave = 
                 PlayerPrefs.SetFloat("PlayerHealth", playerController.playerHP);
-            PlayerPrefs.Save();
+
             Debug.Log($"{playerController.playerHP}플레이어 체력 저장");
         }
         else
@@ -27,5 +27,6 @@ public class SavePlayer : MonoBehaviour
    
 }
 
-//플레이어나  넣어서 사용
-//인스펙터에 플레이어 넣기 (플레이어에 플레이어컨트롤러 스크립트가 들어있어야함)
+//플레이어나 게임매니저에 넣어서 사용? 안해봐서 모르겠음
+//인스펙터에 플레이어/플레이어컨트롤러 넣기 아직 뭘 넣을지 모르겠음
+//아무튼 체력을 저장하는 시점에 OnDisavle이나 Update에 저장하면 될듯?

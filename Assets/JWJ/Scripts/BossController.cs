@@ -9,10 +9,10 @@ public class BossController : MonoBehaviour
     [SerializeField] public float bossAttack;
     [SerializeField] public float bossHP;
 
-    [SerializeField] private float dashTryTime;
-    [SerializeField] private float dashTime;
-    [SerializeField] private float dashSpeed;
-    [SerializeField] private float dashChance;
+    [SerializeField] private float dashTryTime;  // 대쉬 시도 텀
+    [SerializeField] private float dashTime;  // 대쉬 지속시간
+    [SerializeField] private float dashSpeed;  // 대쉬 스피드
+    [SerializeField] private float dashChance; // 대쉬 시도시 성공 확률
 
     public Transform target;
 
@@ -22,7 +22,7 @@ public class BossController : MonoBehaviour
     public bool isDead;
     public event Action OnDeath;
     private BossAnimationController animController;
-    private bool isDashing = false;
+    public bool isDashing = false;
 
     private void Awake()
     {
@@ -39,8 +39,10 @@ public class BossController : MonoBehaviour
         animController.BossSpawn();  // 등장모션 실행
         Invoke("StartChasing", 3f); //스폰후 3초뒤부터 플레이어 따라감
 
-        InvokeRepeating(nameof(TryDash), dashTryTime, dashTime); //주기적으로 대쉬 시도
+        InvokeRepeating(nameof(TryDash), dashTryTime, dashTryTime); //주기적으로 대쉬 시도
     }
+
+
 
     private void TryDash()
     {
@@ -52,17 +54,11 @@ public class BossController : MonoBehaviour
             int random = UnityEngine.Random.Range(0, 100);
             if (random < dashChance)
             {
-                isDashing = true;
-                agent.enabled = false;
-
-
+                Debug.Log("대쉬 시작");
                 animController.Dash();
 
-                Vector3 dashdirection = transform.forward.normalized;
-                float dashstartTime = Time.time;
-                rb.velocity = transform.forward.normalized * dashSpeed;
-
-                Invoke("DashFalse", dashTime);
+                Invoke(nameof(DashCoroutine), 1f);  // 애니메이션 실행하고 대쉬
+                
 
             }
         }
@@ -70,18 +66,48 @@ public class BossController : MonoBehaviour
 
     }
 
-    private void DashFalse()
+    private void DashCoroutine()
     {
-        isDashing = false;
-        rb.velocity = Vector3.zero;
-        agent.Warp(transform.position); // 네비게이터 다시 켜지기 전에 위치 저장
-        agent.enabled = true;
-
-        Debug.Log("대쉬종료");
-
-
-
+        StartCoroutine(Dash());
     }
+
+
+
+    private IEnumerator Dash()
+    {
+        isDashing = true;
+        agent.enabled = false;
+        
+
+        float timer = 0f;
+
+        while (timer < dashTime)
+        {
+            rb.velocity = transform.forward * dashSpeed;
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        rb.velocity = Vector3.zero;
+        agent.enabled = true;
+        isDashing = false;
+
+        Debug.Log("대쉬 종료");
+    }
+
+
+  //  private void DashFalse()
+  //  {
+  //      isDashing = false;
+  //      rb.velocity = Vector3.zero;
+  //      //agent.Warp(transform.position); // 네비게이터 다시 켜지기 전에 위치 저장
+  //      agent.enabled = true;
+  //
+  //      Debug.Log("대쉬종료");
+  //
+  //
+  //
+  //  }
 
     void StartChasing()
     {
@@ -90,7 +116,7 @@ public class BossController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Bullet"))
+        if (collision.gameObject.CompareTag("Bullet") && !isDead)
         {
             Bullet bullet = collision.gameObject.GetComponent<Bullet>();
             if (bullet != null)
@@ -108,6 +134,9 @@ public class BossController : MonoBehaviour
                 }
             }
         }
+
+
+
     }
 
     void Update()
@@ -121,15 +150,15 @@ public class BossController : MonoBehaviour
     private void TakeDamage(float damage)
     {
         bossHP -= damage;
-        AudioManager.instance.PlaySfx(AudioManager.Sfx.MonsterGetDamaged); // JWJ 추가 오디오 재생
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.MonsterGetDamaged); // 오디오 재생
         Debug.Log("몬스터 체력 :" + bossHP); // 추가
     }
     private void Die()
     {
 
 
-
-        Invoke(nameof(DeathDelay), 3f); //사라지는 시간 딜레이
+        agent.enabled = false;
+        Invoke(nameof(DeathDelay), 7f); //사라지는 시간 딜레이
 
 
         if (OnDeath != null)

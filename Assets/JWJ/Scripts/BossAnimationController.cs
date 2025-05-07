@@ -27,7 +27,7 @@ public class BossAnimationController : MonoBehaviour
         float distance = Vector3.Distance(transform.position, player.position); //플레이어까지 거리
        // Debug.Log("플레이어까지 거리: " + distance);
 
-        if (distance < attackRange && isAttacking == false)
+        if (distance < attackRange && isAttacking == false && BossController.isDashing == false)
         {
             RandomAttack();
             isAttacking = true;
@@ -40,39 +40,45 @@ public class BossAnimationController : MonoBehaviour
     public void BossDied()
     {
         Debug.Log("보스 죽음");
+        
         animator.SetTrigger("Die");
-     }
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.BossDead); //오디오 재생
+    }
 
 
 //스폰애니
 public void BossSpawn()
     {
+        
         animator.SetTrigger("Spawn");
+       AudioManager.instance.PlaySfx(AudioManager.Sfx.BossSpawn);
     }
 
 
     //공격 리스트
     public void Dash()
     {
-        Debug.Log("[Dash] SetTrigger 실행 전");
+        
         animator.SetTrigger("Dash");
-        Debug.Log("[Dash] SetTrigger 실행 후");
-
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.BossDash); // 오디오 재생
     }
 
     public void RightAttack()
     {
         animator.SetTrigger("RightAttack");
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.BossAttack); // 오디오 재생
     }
 
     public void LeftAttack()
     {
         animator.SetTrigger("LeftAttack");
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.BossAttack); // 오디오 재생
     }
 
     public void BiteAttack()
     {
         animator.SetTrigger("BiteAttack");
+       AudioManager.instance.PlaySfx(AudioManager.Sfx.BossAttack); // 오디오 재생
     }
 
 
@@ -96,12 +102,15 @@ public void BossSpawn()
             switch (random)
             {
                 case 0:
+                    
                     RightAttack();
                     break;
                 case 1:
+                    
                     LeftAttack();
                     break;
                 case 2:
+                    
                     BiteAttack();
                     break;
             }
