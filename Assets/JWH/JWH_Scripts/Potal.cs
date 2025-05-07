@@ -29,7 +29,7 @@ public class Potal : MonoBehaviour
                 Debug.LogError($"{gameObject.name} 체력없음");
             }
 
-            SceneManager.LoadScene("TestBossMap");
+            SceneManager.LoadScene("TestBossMap2");
             Debug.Log($"Loading scene: {targetSceneName}");
         }
     }
