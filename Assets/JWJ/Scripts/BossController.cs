@@ -128,6 +128,7 @@ public class BossController : MonoBehaviour
                 {
                     isDead = true;
                     agent.enabled = false;
+                    rb.velocity = Vector3.zero;
                     animController.BossDied(); //보스 죽는모션
                     Die();
 
@@ -157,7 +158,8 @@ public class BossController : MonoBehaviour
     {
 
 
-        agent.enabled = false;
+        
+
         Invoke(nameof(DeathDelay), 7f); //사라지는 시간 딜레이
 
 
