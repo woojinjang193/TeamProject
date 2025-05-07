@@ -132,6 +132,8 @@ public class BossController : MonoBehaviour
                     animController.BossDied(); //보스 죽는모션
                     Die();
 
+                    Invoke(nameof(BossDieUI), 3f);
+
                 }
             }
         }
@@ -139,7 +141,12 @@ public class BossController : MonoBehaviour
 
 
     }
+    
 
+    private void BossDieUI()
+    {
+        GameManager.Instance.OnBossDide.Invoke();
+    }
     void Update()
     {
         if (!isDead && !isDashing && agent.enabled && target != null)

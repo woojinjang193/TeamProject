@@ -7,6 +7,7 @@ public class Potal : MonoBehaviour
 {
     public string targetSceneName;
     public SavePlayer savePlayer;
+    public SaveTimer saveTimer;
 
     public void OnTriggerEnter(Collider other)
     {
@@ -23,6 +24,7 @@ public class Potal : MonoBehaviour
             if (savePlayer != null)
             {
                 savePlayer.SaveHp();
+                saveTimer.SaveTi();
             }
             else
             {
