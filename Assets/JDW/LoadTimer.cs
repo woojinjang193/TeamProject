@@ -4,25 +4,23 @@ using UnityEngine;
 
 public class Load : MonoBehaviour
 {
-    public float TimerNextScene; // 다음 씬에서 사용할 플레이어 체력
+    public Timer timer;
 
 
     void Start()
     {
-        LoadTimer();
+        float Timer = PlayerPrefs.GetFloat("Timer", 50f);
+        Debug.Log($"현재 시간 불러오기{Timer}");
 
-        Debug.Log($"타이머 불러오기");
-    }
+        if(timer != null)
+        {
+            timer.time = Timer;
+        }
+        else
+        {
+            Debug.LogError("타이며 연결 안 됨");
+        }
 
-    void LoadTimer()
-    {
-
-        TimerNextScene = PlayerPrefs.GetFloat("Timer");
-    }
-
-
-    public float Timer
-    {
-        get { return TimerNextScene; }
+    
     }
 }

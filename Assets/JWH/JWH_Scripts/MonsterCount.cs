@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class MonsterCount : MonoBehaviour
 {
     public Text KillCount; //처치수 띄우는 text

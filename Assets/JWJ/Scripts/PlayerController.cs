@@ -57,7 +57,14 @@ public class PlayerController : MonoBehaviour
 
         AudioManager.instance.PlayBgm(); // BGM 플레이
         GameObject bossObj = GameObject.FindWithTag("Boss");
-        bosscontroller = bossObj.GetComponent<BossController>();
+        if (bossObj != null)
+        {
+            bosscontroller = bossObj.GetComponent<BossController>();
+        }
+        else
+        {
+            bosscontroller = null;
+        }
         //aniController = GetComponentInChildren <AniController>();
         // _maxHP = playerHP; //초기체력(맥스체력) 저장
         // Debug.Log("player 체력 초기화");
