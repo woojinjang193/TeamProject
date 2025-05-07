@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour
 
        
 
-        if (Input.GetKeyDown(KeyCode.Space) && !isRolling && Time.time >= lastRollTime + rollCooldown)
+        if (Input.GetKeyDown(KeyCode.Space) && !isRolling && Time.time >= lastRollTime + rollCooldown && !isKnockback)
         {
             Debug.Log("구르기");
             aniController.Rolling();

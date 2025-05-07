@@ -1837,8 +1837,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2a5832e7e4e9874fa464e40210e3e6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossAttack: 1
-  bossHP: 20
+  bossAttack: 10
+  bossHP: 200
   dashTryTime: 7
   dashTime: 5
   dashSpeed: 20
