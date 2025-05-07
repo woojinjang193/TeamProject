@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class MonsterCount : MonoBehaviour
 {
     public Text KillCount; //처치수 띄우는 text
@@ -44,7 +45,8 @@ public class MonsterCount : MonoBehaviour
         if (CurrentKillCount >= TargetKillCount)// 목표 킬수 확인하는 부분
         {
             // 게임클리어 사용 부분
-            Debug.Log("게임 클리어!");
+            Debug.Log("포탈 생성!");
+            GameManager.Instance.OnMonsterTimer.Invoke();
         }
     }
 
@@ -53,10 +55,6 @@ public class MonsterCount : MonoBehaviour
         if (KillCount != null)
         {
             KillCount.text = string.Format("{0}", displayedTargetKillCount);
-            if(displayedTargetKillCount <= 0)
-            {
-                GameManager.Instance.OnMonsterCount.Invoke();
-            }
         }
     }
 

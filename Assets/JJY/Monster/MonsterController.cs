@@ -1,11 +1,10 @@
 using System;
 using System.Collections;
-
-//using UnityEditorInternal; ì´ê±° ë­ì§€
-
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UIElements;
+using UnityEditorInternal;
 
 public class MonsterController : MonoBehaviour
 {
@@ -17,14 +16,14 @@ public class MonsterController : MonoBehaviour
 
     private Rigidbody rb;
     private NavMeshAgent agent;
-    private Collider collider;
+    private Collider monsterCollider;
 
     private bool isDead;
     public event Action OnDeath;
 
     private void Awake()
     {
-        collider = GetComponent<Collider>();
+        monsterCollider = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
     }
@@ -57,13 +56,13 @@ public class MonsterController : MonoBehaviour
     private void TakeDamage(float damage)
     {
         monsterHP -= damage;
-        AudioManager.instance.PlaySfx(AudioManager.Sfx.MonsterGetDamaged); // JWJ ì¶”ê°€ ì˜¤ë””ì˜¤ ì¬ìƒ
-        Debug.Log("ëª¬ìŠ¤í„° ì²´ë ¥ :" + monsterHP); // ì¶”ê°€
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.MonsterGetDamaged); // JWJ Ãß°¡ ¿Àµğ¿À Àç»ı
+        Debug.Log("¸ó½ºÅÍ Ã¼·Â :" + monsterHP); // Ãß°¡
     }
     private void Die()
     {
         isDead = true;
-        collider.isTrigger = true;
+        monsterCollider.isTrigger = true;
 
         if (OnDeath != null)
         {

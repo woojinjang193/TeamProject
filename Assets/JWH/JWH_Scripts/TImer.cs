@@ -9,7 +9,8 @@ public class Timer : MonoBehaviour
 {
     public Text[] timeText;
     public Text GameOverText;
-    [SerializeField] float time = 10; // 제한 시간
+    public float time = 10; // 제한 시간
+   // [SerializeField] float time = 10; // 제한 시간
     int min, sec; //분이 너무 많다면 초만 사용
     
     void Start()

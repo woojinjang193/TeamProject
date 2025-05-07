@@ -5,13 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class Potal : MonoBehaviour
 {
-    public static Potal PotalInstance;
     public string targetSceneName;
     public SavePlayer savePlayer;
+    public SaveTimer saveTimer;
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))// 플레이어 태그 탐색
+        if (other.CompareTag("Player"))
         {
             if (targetSceneName == null)
             {
@@ -21,16 +21,17 @@ public class Potal : MonoBehaviour
 
             
 
-            if (savePlayer != null) // 체력저장
+            if (savePlayer != null)
             {
                 savePlayer.SaveHp();
+                saveTimer.SaveTi();
             }
             else
             {
                 Debug.LogError($"{gameObject.name} 체력없음");
             }
 
-            SceneManager.LoadScene(targetSceneName);
+            SceneManager.LoadScene("TestBossMap2");
             Debug.Log($"Loading scene: {targetSceneName}");
         }
     }

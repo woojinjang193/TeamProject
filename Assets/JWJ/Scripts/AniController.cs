@@ -8,15 +8,18 @@ public class AniController : MonoBehaviour
 
     public Animator anima;
     private PlayerController playerController;
+    private BossController bossController;
     private bool wasKnockback = false;
 
     private bool isFStepPlaying = false;
+    public bool isRolling = false;
 
     // Start is called before the first frame update
     void Start()
     {
         anima = GetComponent<Animator>();
         playerController = GetComponentInParent<PlayerController>();
+        bossController = FindObjectOfType<BossController>();
     }
 
     // Update is called once per frame
@@ -29,19 +32,17 @@ public class AniController : MonoBehaviour
             anima.SetTrigger("Attack");
         }
 
-        
+
+
         bool isForward = Input.GetKey(KeyCode.W);
         anima.SetBool("isForward", isForward);
 
-        if(isForward == true && isFStepPlaying == false)
+        if (isForward == true && isFStepPlaying == false)
         {
             AudioManager.instance.PlaySfx(AudioManager.Sfx.FootStep);
             isFStepPlaying = true;
             Invoke(nameof(FootStepSFXDelay), 0.4f);
         }
-
-        
-
 
 
         bool isBack = Input.GetKey(KeyCode.S);
@@ -74,15 +75,31 @@ public class AniController : MonoBehaviour
             Invoke(nameof(FootStepSFXDelay), 0.5f);
         }
 
+
+
         if (playerController.isKnockback && !wasKnockback)
         {
-            anima.SetBool("isKnockback", true);
-            wasKnockback = true;
-            Debug.Log("플레이어 넉백모션");
+
+            if (playerController.isHitByBoss && bossController.isDashing)
+            {
+                anima.SetTrigger("isHitByDash");
+                wasKnockback = true;
+                Debug.Log("보스 넉백 모션 실행");
+            }
+
+            if (playerController.isHitByMonter == true)
+            {
+                anima.SetBool("isHitByMonster", true);
+                wasKnockback = true;
+                Debug.Log("플레이어 몬스터 넉백모션");
+            }
+
+
         }
         else if (!playerController.isKnockback && wasKnockback)
         {
-            anima.SetBool("isKnockback", false);
+            anima.SetBool("isHitByDash", false);
+            anima.SetBool("isHitByMonster", false);
             wasKnockback = false;
         }
 
@@ -94,8 +111,21 @@ public class AniController : MonoBehaviour
 
     }
 
-    private void FootStepSFXDelay()
+    public void Rolling()
+        {
+            anima.SetTrigger("Rolling");
+            isRolling = true;
+            Invoke(nameof(Endrolling), 1f);
+        }
+
+
+private void FootStepSFXDelay()
     {
         isFStepPlaying = false;
+    }
+
+    private void Endrolling()
+    {
+        isRolling = false;
     }
 }

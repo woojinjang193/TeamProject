@@ -5,6 +5,9 @@ using UnityEngine.AI;
 
 public class BossAI : MonoBehaviour
 {
+    /// <summary>
+    /// 안쓰는 스크립트
+    /// </summary>
     public Transform target;
 
     private NavMeshAgent agent;
