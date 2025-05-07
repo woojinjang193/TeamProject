@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
             if (IsPaues == false)
             {
                 Debug.Log("게임멈춤");
-                Player.SetActive(false);
+               Player.SetActive(false);
                 stopUi();
                 Time.timeScale = 0;
                 IsPaues = true;
