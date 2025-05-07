@@ -61,6 +61,8 @@ public class GameManager : MonoBehaviour
     }
     public void Start()
     {
+        Cursor.visible = false;   // 커서 비활성화
+        Cursor.lockState = CursorLockMode.Locked; //커서 가운데 고정
         Time.timeScale =1;
     }
     public void Update()
@@ -77,6 +79,9 @@ public class GameManager : MonoBehaviour
         {
             if (IsPaues == false)
             {
+                Cursor.visible = true;   // 커서 활성화
+                Cursor.lockState = CursorLockMode.None; // 커서 가운데 고정해제
+
                 Debug.Log("게임멈춤");
                 Player.SetActive(false);
                 stopUi();
@@ -110,6 +115,9 @@ public class GameManager : MonoBehaviour
         Debug.Log("게임재시작");
         StopUi.SetActive(false);
 
+        Cursor.visible = false;   // 커서 비활성화
+        Cursor.lockState = CursorLockMode.Locked; // 커서 가운데 고정
+
         Time.timeScale = 1;
         Player.SetActive(true);
         HpB.SetActive(true);
@@ -136,6 +144,8 @@ public class GameManager : MonoBehaviour
    
     public void GameOver()
     {
+        Cursor.visible = true;   // 커서 활성화
+        Cursor.lockState = CursorLockMode.None; // 커서 가운데 고정해제
         //TODO : 캐릭터 사망시 게임오버
         Debug.Log("게임오버");
         Player.SetActive(false);
@@ -151,7 +161,10 @@ public class GameManager : MonoBehaviour
     }
     private void GameClear()
     {
-        
+
+        Cursor.visible = true;   // 커서 활성화
+        Cursor.lockState = CursorLockMode.None; // 커서 가운데 고정해제
+
         gameClear.SetActive(true);
         Player.SetActive(false);
         timer.SetActive(false);
