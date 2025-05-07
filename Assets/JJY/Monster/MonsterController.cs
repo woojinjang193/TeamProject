@@ -15,14 +15,14 @@ public class MonsterController : MonoBehaviour
 
     private Rigidbody rb;
     private NavMeshAgent agent;
-    private Collider collider;
+    private Collider monsterCollider;
 
     private bool isDead;
     public event Action OnDeath;
 
     private void Awake()
     {
-        collider = GetComponent<Collider>();
+        monsterCollider = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
     }
@@ -61,7 +61,7 @@ public class MonsterController : MonoBehaviour
     private void Die()
     {
         isDead = true;
-        collider.isTrigger = true;
+        monsterCollider.isTrigger = true;
 
         if (OnDeath != null)
         {
