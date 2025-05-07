@@ -26,15 +26,18 @@ public class GameManager : MonoBehaviour
     [Header("Object")]
     [SerializeField] GameObject Player;
     [SerializeField] GameObject Monster;
-   // [SerializeField] GameObject Spawner;
+    [SerializeField] GameObject potal;
+    // [SerializeField] GameObject Spawner;
 
-   [Header("UI")]
+    [Header("UI")]
    [SerializeField] GameObject StopUi;
    [SerializeField] GameObject gameOver;
     [SerializeField] GameObject Timer;
     [SerializeField] GameObject HpB;
     [SerializeField] GameObject gameClear;
     [SerializeField] GameObject timer;
+    [SerializeField] GameObject monsterCount;
+    
     
 
    
@@ -80,6 +83,7 @@ public class GameManager : MonoBehaviour
                 IsPaues = true;
                 HpB.SetActive(false);
                 timer.SetActive(false);
+                monsterCount.SetActive(false);
                 //Monster.SetActive(false);
                // Player.SetActive(false);
                 //Spawner.SetActive(false);
@@ -95,7 +99,8 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         OnPlayerDide.AddListener(GameOver);
-        OnTimer.AddListener(GameClear);
+        OnTimer.AddListener(GameOver);
+        OnMonsterTimer.AddListener(Potal);
     }
     public void GameContinue() //게임 일시정지 해제
     {
@@ -106,9 +111,10 @@ public class GameManager : MonoBehaviour
         Player.SetActive(true);
         HpB.SetActive(true);
         timer.SetActive(true);
-      // Monster.SetActive(true);
-      // Player.SetActive(true);
-      // Spawner.SetActive(true);
+        monsterCount.SetActive(true);
+        // Monster.SetActive(true);
+        // Player.SetActive(true);
+        // Spawner.SetActive(true);
 
         IsPaues = false;
     }
@@ -116,6 +122,11 @@ public class GameManager : MonoBehaviour
     {
         StopUi.SetActive(true);
 
+    }
+    private void Potal()
+    {
+        potal.SetActive(true);
+        monsterCount.SetActive(false);
     }
 
    
@@ -129,6 +140,7 @@ public class GameManager : MonoBehaviour
         gameOver.SetActive(true);
         Timer.SetActive(false);
         HpB.SetActive(false);
+        monsterCount.SetActive(false);
     }
     private void OnDisable()
     {

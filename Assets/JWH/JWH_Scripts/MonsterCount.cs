@@ -44,7 +44,8 @@ public class MonsterCount : MonoBehaviour
         if (CurrentKillCount >= TargetKillCount)// 목표 킬수 확인하는 부분
         {
             // 게임클리어 사용 부분
-            Debug.Log("게임 클리어!");
+            Debug.Log("포탈 생성!");
+            GameManager.Instance.OnMonsterTimer.Invoke();
         }
     }
 
@@ -52,7 +53,7 @@ public class MonsterCount : MonoBehaviour
     {
         if (KillCount != null)
         {
-            KillCount.text = string.Format("남은 목표: {0}", displayedTargetKillCount);
+            KillCount.text = string.Format("{0}", displayedTargetKillCount);
         }
     }
 
