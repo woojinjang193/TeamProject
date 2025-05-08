@@ -148,6 +148,7 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None; // 커서 가운데 고정해제
         //TODO : 캐릭터 사망시 게임오버
         Debug.Log("게임오버");
+       // Time.timeScale = 0;
         Player.SetActive(false);
       //  Monster.SetActive(false);
         gameOver.SetActive(true);
@@ -164,10 +165,10 @@ public class GameManager : MonoBehaviour
 
         Cursor.visible = true;   // 커서 활성화
         Cursor.lockState = CursorLockMode.None; // 커서 가운데 고정해제
-
+        Time.timeScale = 0;
         gameClear.SetActive(true);
         Player.SetActive(false);
-        timer.SetActive(false);
+        //timer.SetActive(false);
         HpB.SetActive(false);
     }
 

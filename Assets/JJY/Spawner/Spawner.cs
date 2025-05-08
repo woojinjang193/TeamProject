@@ -7,6 +7,8 @@ public class Spawner : MonoBehaviour
     public MonsterController monster;
     public MonsterCount monsterCount;
 
+    [SerializeField] private Vector3 spawnPosition = new Vector3(0, 0, 0);
+
     Wave curWave;                   //현재 웨이브
     int curWaveNum;                 //현재 웨이브의 숫자
 
@@ -27,15 +29,15 @@ public class Spawner : MonoBehaviour
             spawnReadyMonster--;
             nextSpawnTime = Time.time + curWave.timeBetweenSpawn;
 
-            MonsterController spawnMonster = Instantiate(monster, Vector3.zero, Quaternion.identity) as MonsterController;
-            
+            MonsterController spawnMonster = Instantiate(monster, spawnPosition, Quaternion.identity) as MonsterController;
+
             monsterCount.RegisterMonster(spawnMonster);//몬스터카운트
-            
+
             spawnMonster.OnDeath += OnMonsterDeath;
         }
     }
 
-        
+
 
     void OnMonsterDeath()
     {
